@@ -2,426 +2,349 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17120e">
-  <meta name="description" content="MASALO Food Menu - स्वादिष्ट खाने और शानदार व्यंजनों की सूची।">
-  <title>MASALO | Food Menu</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17110b">
+<title>MASALO | Digital Menu</title>
 
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #17120e;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 7%;
-      background: #211a14;
-      border-bottom: 1px solid #403326;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #f5b942;
-      letter-spacing: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: #eee;
-      font-size: 14px;
-    }
-
-    .nav-links a:hover {
-      color: #f5b942;
-    }
-
-    .page-hero {
-      text-align: center;
-      padding: 75px 7%;
-      background: #211a14;
-    }
-
-    .page-hero small {
-      color: #f5b942;
-      letter-spacing: 3px;
-    }
-
-    .page-hero h1 {
-      font-size: clamp(35px, 6vw, 60px);
-      margin: 15px 0;
-    }
-
-    .page-hero h1 span {
-      color: #f5b942;
-    }
-
-    .page-hero p {
-      color: #c5baae;
-    }
-
-    .menu-section {
-      padding: 60px 7%;
-    }
-
-    .category-title {
-      color: #f5b942;
-      font-size: 28px;
-      margin: 35px 0 20px;
-      border-bottom: 1px solid #403326;
-      padding-bottom: 10px;
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .menu-card {
-      background: #251d16;
-      border: 1px solid #403326;
-      border-radius: 12px;
-      padding: 25px;
-      transition: 0.3s;
-    }
-
-    .menu-card:hover {
-      transform: translateY(-5px);
-      border-color: #f5b942;
-    }
-
-    .food-icon {
-      font-size: 38px;
-      margin-bottom: 12px;
-    }
-
-    .menu-card h3 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .menu-card p {
-      color: #b9afa4;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .price {
-      color: #f5b942;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .order-btn {
-      background: #f5b942;
-      color: #17120e;
-      padding: 9px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .order-btn:hover {
-      background: #ffd36c;
-    }
-
-    .notice {
-      text-align: center;
-      color: #b9afa4;
-      margin-top: 35px;
-      font-size: 14px;
-    }
-
-    .footer {
-      background: #100d0a;
-      padding: 35px 7%;
-      text-align: center;
-      border-top: 1px solid #403326;
-    }
-
-    .footer p {
-      color: #a99e92;
-      font-size: 14px;
-    }
-
-    .footer-links {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a:hover {
-      color: #f5b942;
-    }
-
-    @media (max-width: 800px) {
-      .navbar {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .nav-links {
-        justify-content: center;
-        gap: 12px;
-      }
-
-      .nav-links a {
-        font-size: 12px;
-      }
-
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-hero {
-        padding: 55px 7%;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100e0b;color:#fff;font-family:Arial,sans-serif}
+header{background:#21180f;padding:22px 15px;text-align:center;border-bottom:2px solid #c99b45}
+header h1{color:#e9bd68;font-size:32px;margin:0}
+header p{color:#ddd;margin:8px 0 0}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:13px;background:#19140f}
+nav a{color:#e9bd68;text-decoration:none;font-size:14px}
+.container{max-width:1050px;margin:auto;padding:16px}
+.section-title{color:#e9bd68;border-bottom:1px solid #725329;padding-bottom:10px}
+.info{background:#21180f;border:1px solid #71542c;padding:14px;border-radius:12px;margin:12px 0}
+input,select{width:100%;padding:13px;border-radius:8px;border:1px solid #725329;background:#21180f;color:white;margin:6px 0 12px;font-size:15px}
+label{display:block;color:#e9bd68;margin-top:10px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.food{background:#21180f;border:1px solid #5c4528;border-radius:14px;padding:15px}
+.food h3{color:#f0c779;margin:0 0 8px}
+.price{font-size:19px;color:#fff;margin:10px 0}
+.food p{color:#c8c0b4;font-size:13px;min-height:32px}
+button{background:#c99742;color:#17110b;border:0;padding:11px 15px;border-radius:8px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.secondary{background:#3a3024;color:#fff;border:1px solid #8b6b38}
+.quantity{display:flex;align-items:center;gap:12px;margin-top:12px}
+.quantity button{width:38px;height:36px;padding:0;font-size:20px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #51402b}
+.cart-item small{color:#d4bd93}
+.total{font-size:22px;color:#f0c779;font-weight:bold}
+.action-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.action-grid button{width:100%;min-height:48px}
+.panel{background:#21180f;border:1px solid #71542c;padding:16px;border-radius:14px;margin:18px 0}
+.result{padding:13px;border-radius:9px;background:#183322;color:#b9f3c8;margin-top:12px;overflow-wrap:anywhere}
+.error{background:#481d1d;color:#ffd1d1;padding:12px;border-radius:9px;margin-top:10px}
+footer{text-align:center;color:#aaa;padding:25px}
+.hidden{display:none}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
+<header>
+<h1>MASALO</h1>
+<p>स्वाद जो दिल में बस जाए ❤️</p>
+<p>Welcome to our Digital Restaurant Menu</p>
+</header>
 
-  <header class="navbar">
+<nav>
+<a href="index.html">Home</a>
+<a href="menu.html">Menu</a>
+<a href="offers.html">Offers</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-    <a href="index.html" class="logo">
-      MASALO
-    </a>
+<div class="container">
 
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="offers.html">Offers</a></li>
-        <li><a href="challenges.html">Challenges</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+<div class="info">
+<h3 style="color:#e9bd68;margin-top:0">आपकी टेबल</h3>
+<label>Table Number चुनें</label>
+<select id="tableNumber">
+<option value="">अपनी टेबल चुनें</option>
+</select>
+<p style="font-size:12px;color:#bbb;margin-bottom:0">
+QR कोड से आने पर आपकी टेबल अपने आप चुनी जाएगी।
+</p>
+</div>
 
-  </header>
+<h2 class="section-title">🍽️ हमारा मेन्यू</h2>
+<div id="menuGrid" class="menu-grid"></div>
 
-  <!-- PAGE HERO -->
+<div class="panel" id="cart">
+<h2 class="section-title">🛒 आपका Cart</h2>
+<div id="cartItems">अभी आपका Cart खाली है।</div>
+<p class="total">कुल बिल: ₹<span id="grandTotal">0</span></p>
 
-  <section class="page-hero">
+<h3 style="color:#e9bd68">ऑर्डर की जानकारी</h3>
+<label>आपका नाम</label>
+<input id="customerName" placeholder="अपना नाम लिखें" maxlength="60">
 
-    <small>MASALO FOOD MENU</small>
+<label>मोबाइल नंबर</label>
+<input id="customerPhone" type="tel" placeholder="10 अंकों का मोबाइल नंबर" maxlength="15">
 
-    <h1>
-      हमारा <span>Menu</span>
-    </h1>
+<button id="placeOrderBtn" style="width:100%;font-size:17px">
+Place Order
+</button>
 
-    <p>
-      अपने पसंदीदा स्वाद को चुनें।
-    </p>
+<div id="orderMessage"></div>
+</div>
 
-  </section>
+<div class="panel">
+<h2 class="section-title">🔔 Table Service</h2>
+<p style="color:#ccc">आपको किसी सहायता की जरूरत है? अपने मोबाइल से हमें बुलाएँ।</p>
+<div class="action-grid">
+<button onclick="sendService('Call Waiter')">🔔 Call Waiter</button>
+<button onclick="sendService('Water Please')">🥤 पानी मँगाएँ</button>
+<button onclick="sendService('Request Bill')">🧾 बिल मँगाएँ</button>
+<button onclick="sendService('Other Help')">🙋 अन्य सहायता</button>
+</div>
+<div id="serviceMessage"></div>
+</div>
 
-  <!-- MENU -->
+<div class="panel">
+<h2 class="section-title">📦 अपना ऑर्डर Track करें</h2>
+<label>अपना Tracking Code डालें</label>
+<input id="trackingInput" placeholder="अपना 32 अक्षरों वाला Tracking Code डालें">
+<button onclick="startTracking()" style="width:100%">Track My Order</button>
+<div id="trackingResult"></div>
+</div>
 
-  <main class="menu-section">
+</div>
 
-    <!-- STARTERS -->
+<footer>
+MASALO Restaurant<br>
+Call / WhatsApp: +91 9241744280<br>
+Thank you for visiting MASALO ❤️
+</footer>
 
-    <h2 class="category-title">
-      🥗 Starters
-    </h2>
+<script type="module" src="script.js"></script>
 
-    <div class="menu-grid">
+<script>
+const products = [
+ {id:1,name:"मसाला चाय",category:"चाय और पेय",price:20,description:"गरमागरम मसालेदार चाय"},
+ {id:2,name:"स्पेशल चाय",category:"चाय और पेय",price:30,description:"MASALO की स्पेशल चाय"},
+ {id:3,name:"कॉफी",category:"चाय और पेय",price:40,description:"ताजा गरम कॉफी"},
+ {id:4,name:"समोसा",category:"नाश्ता",price:15,description:"कुरकुरा आलू समोसा"},
+ {id:5,name:"2 समोसा प्लेट",category:"नाश्ता",price:30,description:"दो गरमागरम समोसे"},
+ {id:6,name:"लिट्टी",category:"लिट्टी-चोखा",price:25,description:"बिहारी स्वाद वाली लिट्टी"},
+ {id:7,name:"लिट्टी चोखा प्लेट",category:"लिट्टी-चोखा",price:80,description:"लिट्टी, चोखा और चटनी"},
+ {id:8,name:"स्पेशल लिट्टी प्लेट",category:"लिट्टी-चोखा",price:120,description:"स्पेशल बिहारी लिट्टी प्लेट"},
+ {id:9,name:"वेज मोमोज",category:"मोमोज",price:60,description:"स्वादिष्ट वेज मोमोज"},
+ {id:10,name:"फ्राइड मोमोज",category:"मोमोज",price:80,description:"क्रिस्पी फ्राइड मोमोज"},
+ {id:11,name:"पनीर मोमोज",category:"मोमोज",price:100,description:"स्पेशल पनीर मोमोज"},
+ {id:12,name:"चिली मोमोज",category:"मोमोज",price:110,description:"मसालेदार चिली मोमोज"}
+];
 
-      <div class="menu-card">
-        <div class="food-icon">🍟</div>
-        <h3>French Fries</h3>
-        <p>कुरकुरे और स्वादिष्ट फ्रेंच फ्राइज।</p>
-        <div class="price-row">
-          <span class="price">₹99</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20French%20Fries" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+const cart = {};
+const menuGrid = document.getElementById("menuGrid");
 
-      <div class="menu-card">
-        <div class="food-icon">🥪</div>
-        <h3>Veg Sandwich</h3>
-        <p>ताजी सब्जियों से बना स्वादिष्ट सैंडविच।</p>
-        <div class="price-row">
-          <span class="price">₹119</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Veg%20Sandwich" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+for(let i=1;i<=20;i++){
+ const option=document.createElement("option");
+ option.value=i;
+ option.textContent="Table "+i;
+ document.getElementById("tableNumber").appendChild(option);
+}
 
-      <div class="menu-card">
-        <div class="food-icon">🍕</div>
-        <h3>Mini Pizza</h3>
-        <p>चीज और सब्जियों से भरपूर मिनी पिज्जा।</p>
-        <div class="price-row">
-          <span class="price">₹149</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Mini%20Pizza" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+const params = new URLSearchParams(location.search);
+const qrTable = Number(params.get("table"));
 
+if(Number.isInteger(qrTable) && qrTable>=1 && qrTable<=20){
+ document.getElementById("tableNumber").value=String(qrTable);
+ document.getElementById("tableNumber").disabled=true;
+}
+
+function renderMenu(){
+ menuGrid.innerHTML="";
+ products.forEach(p=>{
+  const card=document.createElement("div");
+  card.className="food";
+  card.innerHTML=`
+   <h3>${p.name}</h3>
+   <small style="color:#b9a17a">${p.category}</small>
+   <p>${p.description}</p>
+   <div class="price">₹${p.price}</div>
+   <button onclick="addItem(${p.id})">Add to Cart +</button>
+  `;
+  menuGrid.appendChild(card);
+ });
+}
+
+function addItem(id){
+ cart[id]=(cart[id]||0)+1;
+ renderCart();
+}
+
+function changeQty(id,change){
+ cart[id]=(cart[id]||0)+change;
+ if(cart[id]<=0) delete cart[id];
+ renderCart();
+}
+
+function getTotal(){
+ return products.reduce((sum,p)=>sum+p.price*(cart[p.id]||0),0);
+}
+
+function renderCart(){
+ const box=document.getElementById("cartItems");
+ const selected=products.filter(p=>cart[p.id]);
+ if(!selected.length){
+  box.innerHTML="अभी आपका Cart खाली है।";
+ }else{
+  box.innerHTML=selected.map(p=>`
+   <div class="cart-item">
+    <div>
+     <b>${p.name}</b><br>
+     <small>₹${p.price} × ${cart[p.id]} = ₹${p.price*cart[p.id]}</small>
     </div>
-
-    <!-- MAIN COURSE -->
-
-    <h2 class="category-title">
-      🍔 Main Course
-    </h2>
-
-    <div class="menu-grid">
-
-      <div class="menu-card">
-        <div class="food-icon">🍔</div>
-        <h3>Classic Burger</h3>
-        <p>ताजा बर्गर और खास MASALO सॉस।</p>
-        <div class="price-row">
-          <span class="price">₹149</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Classic%20Burger" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
-
-      <div class="menu-card">
-        <div class="food-icon">🍝</div>
-        <h3>White Sauce Pasta</h3>
-        <p>क्रीमी सॉस और स्वादिष्ट पास्ता।</p>
-        <div class="price-row">
-          <span class="price">₹179</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20White%20Sauce%20Pasta" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
-
-      <div class="menu-card">
-        <div class="food-icon">🍜</div>
-        <h3>Veg Noodles</h3>
-        <p>सब्जियों और मसालों से बने नूडल्स।</p>
-        <div class="price-row">
-          <span class="price">₹129</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Veg%20Noodles" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
-
+    <div class="quantity">
+     <button class="secondary" onclick="changeQty(${p.id},-1)">−</button>
+     <b>${cart[p.id]}</b>
+     <button onclick="changeQty(${p.id},1)">+</button>
     </div>
+   </div>
+  `).join("");
+ }
+ document.getElementById("grandTotal").textContent=getTotal();
+}
 
-    <!-- DESSERTS -->
+window.addItem=addItem;
+window.changeQty=changeQty;
 
-    <h2 class="category-title">
-      🍰 Desserts
-    </h2>
+document.getElementById("placeOrderBtn").addEventListener("click",async()=>{
+ const message=document.getElementById("orderMessage");
+ const button=document.getElementById("placeOrderBtn");
 
-    <div class="menu-grid">
+ try{
+  if(!window.MASALO) throw new Error("Firebase अभी लोड नहीं हुआ। पेज को कुछ देर बाद फिर खोलें।");
 
-      <div class="menu-card">
-        <div class="food-icon">🍰</div>
-        <h3>Chocolate Cake</h3>
-        <p>चॉकलेट से भरपूर मीठा केक।</p>
-        <div class="price-row">
-          <span class="price">₹99</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Chocolate%20Cake" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+  const customerName=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const tableNumber=Number(document.getElementById("tableNumber").value);
 
-      <div class="menu-card">
-        <div class="food-icon">🍨</div>
-        <h3>Vanilla Ice Cream</h3>
-        <p>ठंडी और स्वादिष्ट वनीला आइसक्रीम।</p>
-        <div class="price-row">
-          <span class="price">₹79</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Vanilla%20Ice%20Cream" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+  if(!customerName) throw new Error("अपना नाम लिखें।");
+  if(!/^[0-9+\-\s]{10,15}$/.test(phone)) throw new Error("सही मोबाइल नंबर लिखें।");
+  if(!tableNumber) throw new Error("अपनी टेबल चुनें।");
+  if(getTotal()<=0) throw new Error("पहले Cart में खाना जोड़ें।");
 
-      <div class="menu-card">
-        <div class="food-icon">🥤</div>
-        <h3>Cold Coffee</h3>
-        <p>क्रीमी और ताजगी से भरी कोल्ड कॉफी।</p>
-        <div class="price-row">
-          <span class="price">₹119</span>
-          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Cold%20Coffee" target="_blank" rel="noopener">Order</a>
-        </div>
-      </div>
+  const items=products.filter(p=>cart[p.id]).map(p=>({
+   id:p.id,
+   name:p.name,
+   price:p.price,
+   quantity:cart[p.id],
+   subtotal:p.price*cart[p.id]
+  }));
 
+  button.disabled=true;
+  button.textContent="ऑर्डर भेजा जा रहा है...";
+
+  const result=await window.MASALO.placeOrder({
+   customerName,
+   phone,
+   tableNumber,
+   items,
+   total:getTotal()
+  });
+
+  message.innerHTML=`
+   <div class="result">
+    <h3>🎉 आपका ऑर्डर भेज दिया गया!</h3>
+    <p>Table Number: ${result.tableNumber}</p>
+    <p>कुल बिल: ₹${result.total}</p>
+    <p>आपका Tracking Code:</p>
+    <b style="word-break:break-all">${result.trackingCode}</b>
+    <p>इस कोड को सुरक्षित रखें। इसी से ऑर्डर Track कर सकेंगे।</p>
+    <button onclick="copyTracking('${result.trackingCode}')">Tracking Code Copy करें</button>
+   </div>
+  `;
+
+  Object.keys(cart).forEach(k=>delete cart[k]);
+  renderCart();
+
+ }catch(error){
+  message.innerHTML=`<div class="error">${error.message}</div>`;
+ }finally{
+  button.disabled=false;
+  button.textContent="Place Order";
+ }
+});
+
+window.copyTracking=async(code)=>{
+ try{
+  await navigator.clipboard.writeText(code);
+  alert("Tracking Code कॉपी हो गया।");
+ }catch(e){
+  alert("आपका Tracking Code: "+code);
+ }
+};
+
+window.sendService=async(type)=>{
+ const box=document.getElementById("serviceMessage");
+ try{
+  if(!window.MASALO) throw new Error("Firebase लोड नहीं हुआ।");
+  const table=Number(document.getElementById("tableNumber").value);
+  if(!table) throw new Error("पहले अपनी टेबल चुनें।");
+
+  await window.MASALO.requestService(type,table);
+  box.innerHTML=`<div class="result">आपकी ${type} की रिक्वेस्ट भेज दी गई है। वेटर को सूचना मिल गई है।</div>`;
+ }catch(error){
+  box.innerHTML=`<div class="error">${error.message}</div>`;
+ }
+};
+
+let stopTracking=null;
+
+window.startTracking=()=>{
+ const code=document.getElementById("trackingInput").value.trim();
+ const box=document.getElementById("trackingResult");
+
+ if(stopTracking){
+  stopTracking();
+  stopTracking=null;
+ }
+
+ try{
+  if(!window.MASALO) throw new Error("Firebase लोड नहीं हुआ।");
+
+  box.innerHTML="ऑर्डर की जानकारी खोज रहे हैं...";
+
+  stopTracking=window.MASALO.trackOrder(code,data=>{
+   if(!data){
+    box.innerHTML='<div class="error">यह Tracking Code नहीं मिला। कृपया जाँचें।</div>';
+    return;
+   }
+
+   const labels={
+    Pending:"ऑर्डर प्राप्त हुआ",
+    Accepted:"ऑर्डर स्वीकार किया गया",
+    Preparing:"आपका खाना तैयार हो रहा है",
+    Ready:"आपका ऑर्डर तैयार है",
+    Completed:"ऑर्डर पूरा हो गया",
+    Cancelled:"ऑर्डर रद्द कर दिया गया"
+   };
+
+   box.innerHTML=`
+    <div class="result">
+     <h3>ऑर्डर की स्थिति</h3>
+     <p>${labels[data.status]||data.status}</p>
+     <p>Table: ${data.tableNumber}</p>
+     <p>Order Total: ₹${data.total}</p>
     </div>
+   `;
+  });
 
-    <p class="notice">
-      नोट: ये शुरुआती नमूना मेनू और कीमतें हैं।
-      वास्तविक मेनू के अनुसार इन्हें बदलें।
-    </p>
+ }catch(error){
+  box.innerHTML=`<div class="error">${error.message}</div>`;
+ }
+};
 
-  </main>
-
-  <!-- FOOTER -->
-
-  <footer class="footer">
-
-    <div class="logo">
-      MASALO
-    </div>
-
-    <p>
-      स्वाद की नई पहचान
-    </p>
-
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="offers.html">Offers</a>
-      <a href="challenges.html">Challenges</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-    <p>
-      © <span id="year"></span> MASALO.
-      All Rights Reserved.
-    </p>
-
-  </footer>
-
-  <script src="script.js"></script>
-
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+renderMenu();
+renderCart();
+</script>
 
 </body>
 </html>
