@@ -4,58 +4,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MASALO | Admin Panel</title>
+<meta name="theme-color" content="#15100b">
+<title>MASALO | Admin Dashboard</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#100e0b;color:white;font-family:Arial,sans-serif}
-header{background:#19140f;padding:22px;text-align:center;border-bottom:1px solid #b88646}
-h1{color:#d9a85d;margin:0}
-main{max-width:850px;margin:25px auto;padding:15px}
-.card{background:#211a13;border:1px solid #594127;border-radius:12px;padding:22px;margin-bottom:20px}
-h2,h3{color:#d9a85d}
-input,button,select{width:100%;padding:13px;margin:8px 0;border-radius:7px;border:1px solid #594127;font-size:15px}
-input,select{background:#100e0b;color:white}
-button{background:#b88646;color:#100e0b;font-weight:bold;cursor:pointer}
-.order{background:#19140f;padding:16px;border-radius:9px;margin:12px 0;border:1px solid #594127}
-small{color:#bbb}
+body{margin:0;background:#100e0b;color:#fff;font-family:Arial,sans-serif}
+header{background:#21180f;padding:22px;text-align:center;border-bottom:2px solid #c99b45}
+header h1{color:#e9bd68;margin:0;font-size:30px}
+header p{color:#ccc}
+main{max-width:1100px;margin:auto;padding:16px}
+.panel{background:#21180f;border:1px solid #604a2d;border-radius:13px;padding:17px;margin:15px 0}
+h2{color:#e9bd68;margin-top:0}
+input,select{width:100%;padding:12px;background:#15110c;color:white;border:1px solid #725329;border-radius:8px;margin:7px 0 12px}
+label{color:#e9bd68}
+button{background:#c99742;color:#17110b;border:0;border-radius:8px;padding:11px 15px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5}
+.logout{background:#8b302b;color:white}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.stat{background:#302316;border:1px solid #725329;border-radius:12px;padding:17px}
+.stat small{color:#cdb58e}
+.stat strong{display:block;font-size:26px;color:#f1c778;margin-top:8px}
+.order,.request{background:#18130e;border:1px solid #554127;padding:15px;border-radius:11px;margin:12px 0}
+.order h3,.request h3{color:#e9bd68;margin-top:0}
+.muted{color:#bcb2a3;font-size:13px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row select{flex:1;min-width:150px}
+.message{padding:12px;background:#183322;color:#c2f4d0;border-radius:8px;margin:10px 0}
+.error{padding:12px;background:#4b1e1e;color:#ffd0d0;border-radius:8px;margin:10px 0}
 .hidden{display:none}
-.error{color:#ff8c8c}
-.success{color:#9de6a5}
+.empty{color:#aaa;padding:15px}
 </style>
 </head>
+
 <body>
 
 <header>
 <h1>MASALO ADMIN</h1>
-<p>Restaurant Management Panel</p>
+<p>Restaurant Management Dashboard</p>
 </header>
 
 <main>
-<section class="card" id="loginBox">
+
+<section class="panel" id="loginPanel">
 <h2>Admin Login</h2>
-<input type="email" id="email" placeholder="Admin Email">
-<input type="password" id="password" placeholder="Password">
-<button id="loginBtn">Login करें</button>
-<p id="loginMessage"></p>
+<label>Email Address</label>
+<input id="email" type="email" placeholder="Admin email">
+
+<label>Password</label>
+<input id="password" type="password" placeholder="Password">
+
+<button id="loginBtn" style="width:100%">Login to Dashboard</button>
+<div id="loginMessage"></div>
 </section>
 
-<section class="card hidden" id="dashboard">
-<h2>Dashboard</h2>
-<p class="success">Admin Login सफल हुआ।</p>
-<button id="refreshBtn">ऑर्डर Refresh करें</button>
-<button id="logoutBtn">Logout</button>
-<h3>नए और पुराने ऑर्डर</h3>
-<div id="ordersList">ऑर्डर लोड हो रहे हैं...</div>
+<section id="dashboard" class="hidden">
+
+<div class="row" style="justify-content:space-between">
+<h2>Dashboard Overview</h2>
+<button id="logoutBtn" class="logout">Logout</button>
+</div>
+
+<div class="cards">
+<div class="stat">
+<small>आज की कमाई</small>
+<strong id="todayEarnings">₹0</strong>
+</div>
+<div class="stat">
+<small>आज पूरे हुए ऑर्डर</small>
+<strong id="todayOrders">0</strong>
+</div>
+<div class="stat">
+<small>आज के कुल ऑर्डर</small>
+<strong id="allTodayOrders">0</strong>
+</div>
+<div class="stat">
+<small>Pending Orders</small>
+<strong id="pendingOrders">0</strong>
+</div>
+</div>
+
+<div class="panel">
+<h2>📦 Customer Orders</h2>
+<p class="muted">नए ऑर्डर यहाँ अपने आप दिखाई देंगे।</p>
+<div id="ordersList"><div class="empty">ऑर्डर लोड हो रहे हैं...</div></div>
+</div>
+
+<div class="panel">
+<h2>🔔 Table Service Requests</h2>
+<p class="muted">वेटर, पानी, बिल और अन्य सहायता की रिक्वेस्ट।</p>
+<div id="requestsList"><div class="empty">रिक्वेस्ट लोड हो रही हैं...</div></div>
+</div>
+
 </section>
 </main>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
 import {
- getDatabase, ref, onValue, update
+ getDatabase,
+ ref,
+ onValue,
+ update
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+
 import {
- getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+ getAuth,
+ signInWithEmailAndPassword,
+ signOut,
+ onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -68,102 +128,235 @@ const firebaseConfig = {
  appId: "1:762877990171:web:90b33a47650e644ccaefbe"
 };
 
+const ADMIN_UID = "HVSDW4Otl9Mf1WZJ6REMk7jATqu1";
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 
-const loginBox = document.getElementById("loginBox");
-const dashboard = document.getElementById("dashboard");
-const message = document.getElementById("loginMessage");
-const ordersList = document.getElementById("ordersList");
+const $ = id => document.getElementById(id);
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
- const email = document.getElementById("email").value.trim();
- const password = document.getElementById("password").value;
+let stopOrders = null;
+let stopRequests = null;
+let currentOrders = {};
 
- if (!email || !password) {
-  message.textContent = "ईमेल और पासवर्ड भरें।";
+function escapeHTML(value){
+ return String(value ?? "").replace(/[&<>"']/g,char=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#039;"
+ }[char]));
+}
+
+function showMessage(id,message,isError=false){
+ $(id).innerHTML =
+ `<div class="${isError?"error":"message"}">${escapeHTML(message)}</div>`;
+}
+
+function money(value){
+ return "₹"+Number(value||0).toLocaleString("en-IN");
+}
+
+function dateText(timestamp){
+ return new Date(timestamp||0).toLocaleString("en-IN");
+}
+
+function isToday(timestamp){
+ const d=new Date(timestamp||0);
+ const now=new Date();
+ return d.getFullYear()===now.getFullYear()
+  && d.getMonth()===now.getMonth()
+  && d.getDate()===now.getDate();
+}
+
+function calculateEarnings(orders){
+ const list=Object.values(orders);
+
+ const today=list.filter(o=>isToday(o.createdAt));
+ const completed=today.filter(o=>o.status==="Completed");
+
+ $("todayEarnings").textContent=money(
+  completed.reduce((sum,o)=>sum+Number(o.total||0),0)
+ );
+
+ $("todayOrders").textContent=completed.length;
+ $("allTodayOrders").textContent=today.length;
+
+ $("pendingOrders").textContent=
+  list.filter(o=>o.status==="Pending").length;
+}
+
+function renderOrders(orders){
+ currentOrders=orders||{};
+ calculateEarnings(currentOrders);
+
+ const list=Object.entries(currentOrders)
+  .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+
+ if(!list.length){
+  $("ordersList").innerHTML='<div class="empty">अभी कोई ऑर्डर नहीं आया है।</div>';
   return;
  }
 
- try {
-  await signInWithEmailAndPassword(auth, email, password);
-  message.textContent = "";
- } catch (error) {
-  message.textContent = "Login नहीं हुआ: " + error.message;
- }
-});
+ $("ordersList").innerHTML=list.map(([id,o])=>{
+  const items=Array.isArray(o.items)?o.items:[];
+  const itemHTML=items.map(item=>
+   `<li>${escapeHTML(item.name)} × ${Number(item.quantity||0)} — ${money(item.subtotal)}</li>`
+  ).join("");
 
-onAuthStateChanged(auth, user => {
- if (user && user.uid === "HVSDW4Otl9Mf1WZJ6REMk7jATqu1") {
-  loginBox.classList.add("hidden");
-  dashboard.classList.remove("hidden");
-  loadOrders();
- } else {
-  loginBox.classList.remove("hidden");
-  dashboard.classList.add("hidden");
- }
-});
+  return `
+   <div class="order">
+    <h3>Table ${escapeHTML(o.tableNumber)} — ${escapeHTML(o.customerName)}</h3>
+    <p><b>मोबाइल:</b> ${escapeHTML(o.phone)}</p>
+    <p><b>ऑर्डर:</b></p>
+    <ul>${itemHTML}</ul>
+    <p><b>कुल बिल: ${money(o.total)}</b></p>
+    <p class="muted">समय: ${dateText(o.createdAt)}</p>
+    <p class="muted">Tracking: ${escapeHTML(o.trackingCode)}</p>
+    <p><b>वर्तमान स्थिति:</b> ${escapeHTML(o.status)}</p>
+    <div class="row">
+     <select id="status-${escapeHTML(id)}">
+      ${["Pending","Accepted","Preparing","Ready","Completed","Cancelled"].map(s=>
+       `<option value="${s}" ${o.status===s?"selected":""}>${s}</option>`
+      ).join("")}
+     </select>
+     <button onclick="updateOrderStatus('${escapeHTML(id)}')">Update Status</button>
+    </div>
+   </div>
+  `;
+ }).join("");
+}
 
-function loadOrders() {
- onValue(ref(db, "orders"), snapshot => {
-  ordersList.innerHTML = "";
+window.updateOrderStatus=async function(id){
+ try{
+  const order=currentOrders[id];
+  if(!order) throw new Error("Order नहीं मिला।");
 
-  if (!snapshot.exists()) {
-   ordersList.textContent = "अभी कोई ऑर्डर नहीं है।";
-   return;
+  const newStatus=$("status-"+id).value;
+  const changes={};
+  changes["orders/"+id+"/status"]=newStatus;
+
+  if(order.trackingCode){
+   changes["tracking/"+order.trackingCode+"/status"]=newStatus;
   }
 
-  snapshot.forEach(child => {
-   const order = child.val();
-   const card = document.createElement("div");
-   card.className = "order";
+  await update(ref(db),changes);
+  alert("ऑर्डर की स्थिति अपडेट हो गई।");
+ }catch(error){
+  alert("Error: "+error.message);
+ }
+};
 
-   const heading = document.createElement("h3");
-   heading.textContent = order.customerName || "ग्राहक";
-   card.appendChild(heading);
+function renderRequests(requests){
+ const list=Object.entries(requests||{})
+  .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
 
-   const details = document.createElement("p");
-   details.textContent = "फोन: " + (order.phone || "") +
-    " | स्थिति: " + (order.status || "Pending");
-   card.appendChild(details);
+ if(!list.length){
+  $("requestsList").innerHTML='<div class="empty">अभी कोई सहायता रिक्वेस्ट नहीं है।</div>';
+  return;
+ }
 
-   const items = document.createElement("p");
-   items.textContent = "आइटम: " + JSON.stringify(order.items || []);
-   card.appendChild(items);
+ $("requestsList").innerHTML=list.map(([id,r])=>`
+  <div class="request">
+   <h3>🔔 ${escapeHTML(r.type)}</h3>
+   <p><b>Table:</b> ${escapeHTML(r.tableNumber)}</p>
+   <p><b>Status:</b> ${escapeHTML(r.status)}</p>
+   <p class="muted">${dateText(r.createdAt)}</p>
+   <div class="row">
+    <select id="request-${escapeHTML(id)}">
+     <option value="Pending" ${r.status==="Pending"?"selected":""}>Pending</option>
+     <option value="Acknowledged" ${r.status==="Acknowledged"?"selected":""}>Acknowledged</option>
+     <option value="Resolved" ${r.status==="Resolved"?"selected":""}>Resolved</option>
+    </select>
+    <button onclick="updateRequestStatus('${escapeHTML(id)}')">Update</button>
+   </div>
+  </div>
+ `).join("");
+}
 
-   const select = document.createElement("select");
-   ["Pending","Accepted","Preparing","Ready","Completed","Cancelled"].forEach(status => {
-    const option = document.createElement("option");
-    option.value = status;
-    option.textContent = status;
-    if (status === order.status) option.selected = true;
-    select.appendChild(option);
-   });
+window.updateRequestStatus=async function(id){
+ try{
+  const status=$("request-"+id).value;
 
-   select.addEventListener("change", async () => {
-    try {
-     await update(ref(db, "orders/" + child.key), {
-      status: select.value
-     });
-    } catch (error) {
-     alert("स्थिति अपडेट नहीं हुई: " + error.message);
-    }
-   });
-
-   card.appendChild(select);
-   ordersList.appendChild(card);
+  await update(ref(db,"serviceRequests/"+id),{
+   status
   });
- }, error => {
-  ordersList.textContent = "ऑर्डर लोड नहीं हुए: " + error.message;
+
+  alert("Service request अपडेट हो गई।");
+ }catch(error){
+  alert("Error: "+error.message);
+ }
+};
+
+function stopDashboard(){
+ if(stopOrders) stopOrders();
+ if(stopRequests) stopRequests();
+ stopOrders=null;
+ stopRequests=null;
+}
+
+function startDashboard(){
+ stopDashboard();
+
+ stopOrders=onValue(ref(db,"orders"),snapshot=>{
+  renderOrders(snapshot.val()||{});
+ },error=>{
+  showMessage("ordersList",error.message,true);
+ });
+
+ stopRequests=onValue(ref(db,"serviceRequests"),snapshot=>{
+  renderRequests(snapshot.val()||{});
+ },error=>{
+  showMessage("requestsList",error.message,true);
  });
 }
 
-document.getElementById("refreshBtn").addEventListener("click", loadOrders);
+$("loginBtn").addEventListener("click",async()=>{
+ const email=$("email").value.trim();
+ const password=$("password").value;
+ const button=$("loginBtn");
 
-document.getElementById("logoutBtn").addEventListener("click", async () => {
+ try{
+  if(!email||!password) throw new Error("Email और Password भरें।");
+
+  button.disabled=true;
+  button.textContent="Logging in...";
+
+  const result=await signInWithEmailAndPassword(auth,email,password);
+
+  if(result.user.uid!==ADMIN_UID){
+   await signOut(auth);
+   throw new Error("यह अकाउंट MASALO Admin नहीं है।");
+  }
+
+ }catch(error){
+  showMessage("loginMessage",error.message,true);
+ }finally{
+  button.disabled=false;
+  button.textContent="Login to Dashboard";
+ }
+});
+
+$("logoutBtn").addEventListener("click",async()=>{
+ stopDashboard();
  await signOut(auth);
 });
+
+onAuthStateChanged(auth,user=>{
+ if(user && user.uid===ADMIN_UID){
+  $("loginPanel").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("loginMessage").innerHTML="";
+  startDashboard();
+ }else{
+  stopDashboard();
+  $("dashboard").classList.add("hidden");
+  $("loginPanel").classList.remove("hidden");
+ }
+});
+
 </script>
 </body>
 </html>
