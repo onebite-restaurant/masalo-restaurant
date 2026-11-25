@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100e0b">
+  <title>संपर्क करें | MASALO</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #100e0b;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 22px 15px;
+      background: #19140f;
+      border-bottom: 1px solid #b88646;
+    }
+
+    header h1 {
+      color: #d9a85d;
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 3px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background: #211a13;
+    }
+
+    nav a {
+      color: #f5d49b;
+      text-decoration: none;
+      padding: 9px 13px;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background: #b88646;
+      color: #100e0b;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 45px 20px 25px;
+    }
+
+    .hero h2 {
+      color: #d9a85d;
+      font-size: 32px;
+    }
+
+    .hero p {
+      color: #ddd;
+      line-height: 1.7;
+    }
+
+    .contact-box {
+      max-width: 650px;
+      margin: 20px auto 45px;
+      padding: 25px;
+      background: #211a13;
+      border: 1px solid #594127;
+      border-radius: 14px;
+    }
+
+    .contact-item {
+      padding: 18px;
+      margin-bottom: 15px;
+      background: #19140f;
+      border-radius: 10px;
+      border: 1px solid #403020;
+    }
+
+    .contact-item h3 {
+      color: #d9a85d;
+      margin-top: 0;
+    }
+
+    .contact-item p {
+      color: #ddd;
+      word-break: break-word;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 20px;
+      background: #b88646;
+      color: #100e0b;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      background: #19140f;
+      color: #aaa;
+      border-top: 1px solid #594127;
+    }
+
+    @media (max-width: 600px) {
+      .contact-box {
+        margin: 15px;
+        padding: 18px;
+      }
+
+      .hero h2 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MASALO</h1>
+  <p>स्वाद जो याद रह जाए</p>
+</header>
+
+<nav>
+  <a href="index.html">होम</a>
+  <a href="menu.html">मेनू</a>
+  <a href="offers.html">ऑफर्स</a>
+  <a href="challenges.html">चैलेंज</a>
+  <a href="about.html">हमारे बारे में</a>
+  <a href="contact.html">संपर्क</a>
+</nav>
+
+<section class="hero">
+  <h2>हमसे संपर्क करें</h2>
+  <p>ऑर्डर, जानकारी या किसी सुझाव के लिए हमसे जुड़ें।</p>
+</section>
+
+<main class="contact-box">
+
+  <section class="contact-item">
+    <h3>📱 मोबाइल नंबर</h3>
+    <p>9241744280</p>
+    <a class="button" href="tel:+919241744280">
+      फोन करें
+    </a>
+  </section>
+
+  <section class="contact-item">
+    <h3>💬 WhatsApp</h3>
+    <p>WhatsApp पर संदेश भेजें या ऑर्डर करें।</p>
+    <a class="button"
+       href="https://wa.me/919241744280"
+       target="_blank"
+       rel="noopener">
+      WhatsApp संदेश भेजें
+    </a>
+  </section>
+
+  <section class="contact-item">
+    <h3>✉️ SMS</h3>
+    <p>मोबाइल SMS के माध्यम से संपर्क करें।</p>
+    <a class="button" href="sms:+919241744280">
+      SMS भेजें
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> MASALO. सभी अधिकार सुरक्षित।
+</footer>
+
+<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>

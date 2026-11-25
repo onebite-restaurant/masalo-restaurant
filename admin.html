@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASALO | Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100e0b;color:white;font-family:Arial,sans-serif}
+header{background:#19140f;padding:22px;text-align:center;border-bottom:1px solid #b88646}
+h1{color:#d9a85d;margin:0}
+main{max-width:850px;margin:25px auto;padding:15px}
+.card{background:#211a13;border:1px solid #594127;border-radius:12px;padding:22px;margin-bottom:20px}
+h2,h3{color:#d9a85d}
+input,button,select{width:100%;padding:13px;margin:8px 0;border-radius:7px;border:1px solid #594127;font-size:15px}
+input,select{background:#100e0b;color:white}
+button{background:#b88646;color:#100e0b;font-weight:bold;cursor:pointer}
+.order{background:#19140f;padding:16px;border-radius:9px;margin:12px 0;border:1px solid #594127}
+small{color:#bbb}
+.hidden{display:none}
+.error{color:#ff8c8c}
+.success{color:#9de6a5}
+</style>
+</head>
+<body>
+
+<header>
+<h1>MASALO ADMIN</h1>
+<p>Restaurant Management Panel</p>
+</header>
+
+<main>
+<section class="card" id="loginBox">
+<h2>Admin Login</h2>
+<input type="email" id="email" placeholder="Admin Email">
+<input type="password" id="password" placeholder="Password">
+<button id="loginBtn">Login करें</button>
+<p id="loginMessage"></p>
+</section>
+
+<section class="card hidden" id="dashboard">
+<h2>Dashboard</h2>
+<p class="success">Admin Login सफल हुआ।</p>
+<button id="refreshBtn">ऑर्डर Refresh करें</button>
+<button id="logoutBtn">Logout</button>
+<h3>नए और पुराने ऑर्डर</h3>
+<div id="ordersList">ऑर्डर लोड हो रहे हैं...</div>
+</section>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import {
+ getDatabase, ref, onValue, update
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+import {
+ getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyAxTtHQBZZtHB3-vWNFcJqjvTTqqTdO1gM",
+ authDomain: "masalo-6abad.firebaseapp.com",
+ databaseURL: "https://masalo-6abad-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId: "masalo-6abad",
+ storageBucket: "masalo-6abad.firebasestorage.app",
+ messagingSenderId: "762877990171",
+ appId: "1:762877990171:web:90b33a47650e644ccaefbe"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+const loginBox = document.getElementById("loginBox");
+const dashboard = document.getElementById("dashboard");
+const message = document.getElementById("loginMessage");
+const ordersList = document.getElementById("ordersList");
+
+document.getElementById("loginBtn").addEventListener("click", async () => {
+ const email = document.getElementById("email").value.trim();
+ const password = document.getElementById("password").value;
+
+ if (!email || !password) {
+  message.textContent = "ईमेल और पासवर्ड भरें।";
+  return;
+ }
+
+ try {
+  await signInWithEmailAndPassword(auth, email, password);
+  message.textContent = "";
+ } catch (error) {
+  message.textContent = "Login नहीं हुआ: " + error.message;
+ }
+});
+
+onAuthStateChanged(auth, user => {
+ if (user && user.uid === "HVSDW4Otl9Mf1WZJ6REMk7jATqu1") {
+  loginBox.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+  loadOrders();
+ } else {
+  loginBox.classList.remove("hidden");
+  dashboard.classList.add("hidden");
+ }
+});
+
+function loadOrders() {
+ onValue(ref(db, "orders"), snapshot => {
+  ordersList.innerHTML = "";
+
+  if (!snapshot.exists()) {
+   ordersList.textContent = "अभी कोई ऑर्डर नहीं है।";
+   return;
+  }
+
+  snapshot.forEach(child => {
+   const order = child.val();
+   const card = document.createElement("div");
+   card.className = "order";
+
+   const heading = document.createElement("h3");
+   heading.textContent = order.customerName || "ग्राहक";
+   card.appendChild(heading);
+
+   const details = document.createElement("p");
+   details.textContent = "फोन: " + (order.phone || "") +
+    " | स्थिति: " + (order.status || "Pending");
+   card.appendChild(details);
+
+   const items = document.createElement("p");
+   items.textContent = "आइटम: " + JSON.stringify(order.items || []);
+   card.appendChild(items);
+
+   const select = document.createElement("select");
+   ["Pending","Accepted","Preparing","Ready","Completed","Cancelled"].forEach(status => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = status;
+    if (status === order.status) option.selected = true;
+    select.appendChild(option);
+   });
+
+   select.addEventListener("change", async () => {
+    try {
+     await update(ref(db, "orders/" + child.key), {
+      status: select.value
+     });
+    } catch (error) {
+     alert("स्थिति अपडेट नहीं हुई: " + error.message);
+    }
+   });
+
+   card.appendChild(select);
+   ordersList.appendChild(card);
+  });
+ }, error => {
+  ordersList.textContent = "ऑर्डर लोड नहीं हुए: " + error.message;
+ });
+}
+
+document.getElementById("refreshBtn").addEventListener("click", loadOrders);
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+ await signOut(auth);
+});
+</script>
+</body>
+</html>

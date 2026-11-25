@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120e">
+  <meta name="description" content="MASALO Food Challenges - मजेदार खाने के चैलेंज में हिस्सा लें।">
+  <title>MASALO | Food Challenges</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #17120e;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      background: #211a14;
+      border-bottom: 1px solid #403326;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f5b942;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #f5b942;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 75px 7%;
+      background: #211a14;
+    }
+
+    .hero small {
+      color: #f5b942;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(35px, 6vw, 60px);
+      margin: 15px 0;
+    }
+
+    .hero h1 span {
+      color: #f5b942;
+    }
+
+    .hero p {
+      color: #c5baae;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 60px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: #f5b942;
+      font-size: 32px;
+    }
+
+    .section-title p {
+      color: #b9afa4;
+      margin-top: 10px;
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .challenge-card {
+      background: #251d16;
+      border: 1px solid #403326;
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .challenge-card:hover {
+      transform: translateY(-7px);
+      border-color: #f5b942;
+    }
+
+    .challenge-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .challenge-card h3 {
+      color: #f5b942;
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .challenge-card p {
+      color: #c5baae;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #f5b942;
+      color: #17120e;
+      padding: 12px 22px;
+      border-radius: 7px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffd36c;
+      transform: translateY(-3px);
+    }
+
+    .rules {
+      background: #211a14;
+      border: 1px solid #403326;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .rules h2 {
+      color: #f5b942;
+      margin-bottom: 18px;
+    }
+
+    .rules ul {
+      padding-left: 22px;
+      color: #c5baae;
+    }
+
+    .rules li {
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      background: #100d0a;
+      padding: 35px 7%;
+      text-align: center;
+      border-top: 1px solid #403326;
+    }
+
+    .footer p {
+      color: #a99e92;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #f5b942;
+    }
+
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .challenge-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="navbar">
+
+    <a href="index.html" class="logo">
+      MASALO
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <small>MASALO FUN ZONE</small>
+
+    <h1>
+      Food <span>Challenges</span>
+    </h1>
+
+    <p>
+      स्वाद, मजा और चुनौती!
+      MASALO के मजेदार Food Challenges
+      में हिस्सा लें।
+    </p>
+
+  </section>
+
+  <!-- CHALLENGES -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>हमारे Challenges</h2>
+      <p>अपनी पसंद का चैलेंज चुनें</p>
+    </div>
+
+    <div class="challenge-grid">
+
+      <!-- CHALLENGE 1 -->
+
+      <div class="challenge-card">
+
+        <div class="challenge-icon">🌶️</div>
+
+        <h3>Spicy Challenge</h3>
+
+        <p>
+          मसालेदार खाने के मजेदार चैलेंज
+          में अपनी क्षमता दिखाएँ।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=I%20want%20to%20join%20the%20Spicy%20Challenge"
+          target="_blank"
+          rel="noopener">
+          Join Challenge
+        </a>
+
+      </div>
+
+      <!-- CHALLENGE 2 -->
+
+      <div class="challenge-card">
+
+        <div class="challenge-icon">🍔</div>
+
+        <h3>Burger Challenge</h3>
+
+        <p>
+          Burger Lovers के लिए
+          एक खास Food Challenge।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=I%20want%20to%20join%20the%20Burger%20Challenge"
+          target="_blank"
+          rel="noopener">
+          Join Challenge
+        </a>
+
+      </div>
+
+      <!-- CHALLENGE 3 -->
+
+      <div class="challenge-card">
+
+        <div class="challenge-icon">⏱️</div>
+
+        <h3>Food Time Challenge</h3>
+
+        <p>
+          तय समय में खाने का मजेदार
+          और सुरक्षित चैलेंज।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=I%20want%20to%20join%20the%20Food%20Time%20Challenge"
+          target="_blank"
+          rel="noopener">
+          Join Challenge
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- RULES -->
+
+  <section class="section">
+
+    <div class="rules">
+
+      <h2>Challenge Rules</h2>
+
+      <ul>
+        <li>चैलेंज में हिस्सा लेने से पहले MASALO से संपर्क करें।</li>
+        <li>हर चैलेंज के नियम और शर्तें पहले समझें।</li>
+        <li>अपनी स्वास्थ्य और खाने की क्षमता का ध्यान रखें।</li>
+        <li>किसी भी तरह की जबरदस्ती नहीं होगी।</li>
+        <li>चैलेंज की उपलब्धता और पुरस्कार की जानकारी पहले पुष्टि करें।</li>
+      </ul>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="logo">
+      MASALO
+    </div>
+
+    <p>
+      स्वाद की नई पहचान
+    </p>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="offers.html">Offers</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <p>
+      © <span id="year"></span> MASALO.
+      All Rights Reserved.
+    </p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

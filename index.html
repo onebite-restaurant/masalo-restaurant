@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120e">
+  <meta name="description" content="MASALO - स्वाद की नई पहचान। स्वादिष्ट खाना, शानदार ऑफर्स और मजेदार फूड चैलेंज।">
+
+  <title>MASALO | स्वाद की नई पहचान</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #17120e;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* NAVIGATION */
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      background: #211a14;
+      border-bottom: 1px solid #403326;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f5b942;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #eeeeee;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f5b942;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 7%;
+      background:
+        linear-gradient(
+          90deg,
+          #17120e 25%,
+          #17120ecc 65%,
+          #17120e66
+        ),
+        url("assets/hero.jpg") center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .tagline {
+      color: #f5b942;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    .hero h1 span {
+      color: #f5b942;
+    }
+
+    .hero p {
+      color: #d1c7bc;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    /* BUTTONS */
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 7px;
+      font-weight: bold;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #f5b942;
+      color: #17120e;
+    }
+
+    .btn-primary:hover {
+      background: #ffd36c;
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      border: 1px solid #f5b942;
+      color: #f5b942;
+    }
+
+    .btn-outline:hover {
+      background: #f5b942;
+      color: #17120e;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      padding: 75px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title small {
+      color: #f5b942;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-top: 8px;
+    }
+
+    .section-title p {
+      color: #b9afa4;
+      margin-top: 10px;
+    }
+
+    /* CARDS */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: #251d16;
+      border: 1px solid #403326;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: #f5b942;
+    }
+
+    .card-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #f5b942;
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #c5baae;
+      margin-bottom: 20px;
+    }
+
+    .card a {
+      color: #f5b942;
+      font-weight: bold;
+    }
+
+    /* ABOUT */
+
+    .highlight {
+      background: #211a14;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .about-content h2 {
+      font-size: 36px;
+      margin-top: 10px;
+    }
+
+    .about-content p {
+      color: #c5baae;
+      font-size: 17px;
+      margin: 20px 0;
+    }
+
+    /* CONTACT */
+
+    .contact-section {
+      background: #17120e;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 650px;
+      margin: auto;
+      padding: 35px;
+      background: #251d16;
+      border: 1px solid #403326;
+      border-radius: 15px;
+    }
+
+    .contact-box h2 {
+      color: #f5b942;
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: #c5baae;
+      margin-bottom: 20px;
+    }
+
+    .phone-number {
+      font-size: 23px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 25px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background: #100d0a;
+      padding: 35px 7%;
+      text-align: center;
+      border-top: 1px solid #403326;
+    }
+
+    .footer .logo {
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      color: #a99e92;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a:hover {
+      color: #f5b942;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 70vh;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2 {
+        font-size: 29px;
+      }
+
+      .contact-box {
+        padding: 25px 15px;
+      }
+
+      .contact-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="navbar">
+
+    <a href="index.html" class="logo">
+      MASALO
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- HOME HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="tagline">
+        Welcome to MASALO
+      </div>
+
+      <h1>
+        स्वाद की नई<br>
+        <span>पहचान</span>
+      </h1>
+
+      <p>
+        हर निवाले में स्वाद, हर पल में खुशी।
+        MASALO के साथ अपने पसंदीदा खाने का
+        शानदार अनुभव प्राप्त करें।
+      </p>
+
+      <div class="buttons">
+
+        <a href="menu.html" class="btn btn-primary">
+          हमारा Menu देखें
+        </a>
+
+        <a href="offers.html" class="btn btn-outline">
+          Special Offers
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <small>EXPLORE MASALO</small>
+
+      <h2>हमारे साथ कुछ खास</h2>
+
+      <p>
+        खाना, ऑफर्स और मजेदार चैलेंज
+      </p>
+
+    </div>
+
+    <div class="cards">
+
+      <!-- MENU -->
+
+      <div class="card">
+
+        <div class="card-icon">🍽️</div>
+
+        <h3>Our Menu</h3>
+
+        <p>
+          स्वादिष्ट व्यंजनों की हमारी खास सूची
+          देखें और अपना पसंदीदा चुनें।
+        </p>
+
+        <a href="menu.html">
+          Menu देखें →
+        </a>
+
+      </div>
+
+      <!-- OFFERS -->
+
+      <div class="card">
+
+        <div class="card-icon">🎁</div>
+
+        <h3>Special Offers</h3>
+
+        <p>
+          शानदार Deals और विशेष ऑफर्स
+          के साथ खाने का आनंद लें।
+        </p>
+
+        <a href="offers.html">
+          Offers देखें →
+        </a>
+
+      </div>
+
+      <!-- CHALLENGES -->
+
+      <div class="card">
+
+        <div class="card-icon">🔥</div>
+
+        <h3>Food Challenges</h3>
+
+        <p>
+          मजेदार Food Challenges में हिस्सा लें
+          और अपनी प्रतिभा दिखाएँ।
+        </p>
+
+        <a href="challenges.html">
+          Challenges देखें →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="section highlight">
+
+    <div class="about-content">
+
+      <div class="tagline">
+        OUR STORY
+      </div>
+
+      <h2>MASALO के बारे में</h2>
+
+      <p>
+        MASALO एक नई सोच और नए स्वाद की शुरुआत है।
+        हमारा उद्देश्य ग्राहकों को अच्छा खाना,
+        शानदार अनुभव और बेहतरीन सेवा देना है।
+      </p>
+
+      <a href="about.html" class="btn btn-primary">
+        हमारे बारे में जानें
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="section contact-section">
+
+    <div class="contact-box">
+
+      <h2>हमसे संपर्क करें</h2>
+
+      <p>
+        ऑर्डर, जानकारी या किसी सुझाव के लिए
+        हमसे सीधे संपर्क करें।
+      </p>
+
+      <div class="phone-number">
+        +91 92417 44280
+      </div>
+
+      <div class="contact-buttons">
+
+        <!-- WHATSAPP -->
+
+        <a
+          href="https://wa.me/919241744280"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary">
+
+          WhatsApp Message
+
+        </a>
+
+        <!-- SMS -->
+
+        <a
+          href="sms:+919241744280"
+          class="btn btn-outline">
+
+          Send SMS
+
+        </a>
+
+        <!-- PHONE CALL -->
+
+        <a
+          href="tel:+919241744280"
+          class="btn btn-outline">
+
+          Call Now
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="logo">
+      MASALO
+    </div>
+
+    <p>
+      स्वाद की नई पहचान
+    </p>
+
+    <div class="footer-links">
+
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="offers.html">Offers</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+
+    </div>
+
+    <p>
+      © <span id="year"></span> MASALO.
+      All Rights Reserved.
+    </p>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script type="module" src="script.js"></script>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

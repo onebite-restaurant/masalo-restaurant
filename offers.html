@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120e">
+  <meta name="description" content="MASALO Special Offers और Food Deals।">
+  <title>MASALO | Special Offers</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #17120e;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      background: #211a14;
+      border-bottom: 1px solid #403326;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f5b942;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #f5b942;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 75px 7%;
+      background: #211a14;
+    }
+
+    .hero small {
+      color: #f5b942;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      margin: 15px 0;
+    }
+
+    .hero h1 span {
+      color: #f5b942;
+    }
+
+    .hero p {
+      color: #c5baae;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 60px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: #f5b942;
+      font-size: 32px;
+    }
+
+    .section-title p {
+      color: #b9afa4;
+      margin-top: 10px;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .offer-card {
+      background: #251d16;
+      border: 1px solid #403326;
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-7px);
+      border-color: #f5b942;
+    }
+
+    .offer-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .offer-card h3 {
+      color: #f5b942;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .offer-card p {
+      color: #c5baae;
+      margin-bottom: 20px;
+    }
+
+    .offer-label {
+      display: inline-block;
+      background: #f5b942;
+      color: #17120e;
+      padding: 7px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #f5b942;
+      color: #17120e;
+      padding: 12px 22px;
+      border-radius: 7px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffd36c;
+      transform: translateY(-3px);
+    }
+
+    .terms {
+      background: #211a14;
+      border: 1px solid #403326;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 45px;
+    }
+
+    .terms h3 {
+      color: #f5b942;
+      margin-bottom: 12px;
+    }
+
+    .terms p {
+      color: #c5baae;
+      font-size: 14px;
+    }
+
+    .footer {
+      background: #100d0a;
+      padding: 35px 7%;
+      text-align: center;
+      border-top: 1px solid #403326;
+    }
+
+    .footer p {
+      color: #a99e92;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #f5b942;
+    }
+
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .offers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="navbar">
+
+    <a href="index.html" class="logo">
+      MASALO
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <small>MASALO SPECIAL DEALS</small>
+
+    <h1>
+      शानदार <span>Offers</span>
+    </h1>
+
+    <p>
+      अपने पसंदीदा खाने पर शानदार Deals
+      और विशेष ऑफर्स का आनंद लें।
+    </p>
+
+  </section>
+
+  <!-- OFFERS -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>हमारे Special Offers</h2>
+      <p>आपके लिए कुछ खास</p>
+    </div>
+
+    <div class="offers-grid">
+
+      <!-- OFFER 1 -->
+
+      <div class="offer-card">
+
+        <div class="offer-icon">🍔</div>
+
+        <span class="offer-label">
+          COMBO DEAL
+        </span>
+
+        <h3>Burger Combo</h3>
+
+        <p>
+          Burger + French Fries + Cold Drink
+        </p>
+
+        <p>
+          स्वादिष्ट कॉम्बो का आनंद लें।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=Please%20tell%20me%20about%20Burger%20Combo%20Offer"
+          target="_blank"
+          rel="noopener">
+          Offer पूछें
+        </a>
+
+      </div>
+
+      <!-- OFFER 2 -->
+
+      <div class="offer-card">
+
+        <div class="offer-icon">🍕</div>
+
+        <span class="offer-label">
+          FAMILY DEAL
+        </span>
+
+        <h3>Pizza Special</h3>
+
+        <p>
+          Pizza + Garlic Bread + Cold Drink
+        </p>
+
+        <p>
+          दोस्तों और परिवार के साथ।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=Please%20tell%20me%20about%20Pizza%20Special%20Offer"
+          target="_blank"
+          rel="noopener">
+          Offer पूछें
+        </a>
+
+      </div>
+
+      <!-- OFFER 3 -->
+
+      <div class="offer-card">
+
+        <div class="offer-icon">🎁</div>
+
+        <span class="offer-label">
+          SPECIAL DEAL
+        </span>
+
+        <h3>Weekend Special</h3>
+
+        <p>
+          Weekend पर खास खाने की Deals।
+        </p>
+
+        <p>
+          अपने सप्ताहांत को स्वादिष्ट बनाएँ।
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/919241744280?text=Please%20tell%20me%20about%20Weekend%20Special%20Offer"
+          target="_blank"
+          rel="noopener">
+          Offer पूछें
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- TERMS -->
+
+    <div class="terms">
+
+      <h3>Offer की जानकारी</h3>
+
+      <p>
+        ये नमूना ऑफर्स हैं। वास्तविक कीमत, छूट,
+        उपलब्धता और ऑफर की अवधि तय करने के बाद
+        यहाँ सही जानकारी अपडेट करें।
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="logo">
+      MASALO
+    </div>
+
+    <p>
+      स्वाद की नई पहचान
+    </p>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="offers.html">Offers</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <p>
+      © <span id="year"></span> MASALO.
+      All Rights Reserved.
+    </p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

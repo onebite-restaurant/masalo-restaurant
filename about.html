@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100e0b">
+  <title>हमारे बारे में | MASALO</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #100e0b;
+      color: #fff;
+    }
+
+    header {
+      padding: 22px 15px;
+      text-align: center;
+      background: #19140f;
+      border-bottom: 1px solid #b88646;
+    }
+
+    header h1 {
+      color: #d9a85d;
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 3px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background: #211a13;
+    }
+
+    nav a {
+      color: #f5d49b;
+      text-decoration: none;
+      padding: 9px 13px;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background: #b88646;
+      color: #100e0b;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px 35px;
+    }
+
+    .hero h2 {
+      color: #d9a85d;
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.8;
+      color: #ddd;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 25px;
+    }
+
+    .card {
+      background: #211a13;
+      border: 1px solid #594127;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      color: #d9a85d;
+      margin-top: 0;
+    }
+
+    .card p {
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    .highlight {
+      color: #f5d49b;
+      font-weight: bold;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 22px;
+      background: #b88646;
+      color: #100e0b;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      background: #19140f;
+      color: #aaa;
+      border-top: 1px solid #594127;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 27px;
+      }
+
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MASALO</h1>
+  <p>स्वाद जो याद रह जाए</p>
+</header>
+
+<nav>
+  <a href="index.html">होम</a>
+  <a href="menu.html">मेनू</a>
+  <a href="offers.html">ऑफर्स</a>
+  <a href="challenges.html">चैलेंज</a>
+  <a href="about.html">हमारे बारे में</a>
+  <a href="contact.html">संपर्क</a>
+</nav>
+
+<section class="hero">
+  <h2>हमारे बारे में</h2>
+  <p>
+    MASALO में आपका स्वागत है।
+    हमारा उद्देश्य स्वादिष्ट भोजन, अच्छी सेवा और
+    यादगार अनुभव के माध्यम से हर ग्राहक के चेहरे पर
+    मुस्कान लाना है।
+  </p>
+</section>
+
+<main class="content">
+
+  <section class="card">
+    <h3>हमारी कहानी</h3>
+    <p>
+      MASALO एक नई शुरुआत और एक बड़े सपने का नाम है।
+      हम ऐसा भोजन अनुभव बनाना चाहते हैं जहाँ स्वाद,
+      गुणवत्ता और अपनापन एक साथ मिलें।
+    </p>
+  </section>
+
+  <section class="card">
+    <h3>हमारा उद्देश्य</h3>
+    <p>
+      हर ग्राहक को अच्छा भोजन, साफ-सुथरी सेवा और
+      भरोसेमंद अनुभव देना हमारा उद्देश्य है।
+    </p>
+  </section>
+
+  <section class="card">
+    <h3>हमारी खासियत</h3>
+    <p>
+      <span class="highlight">स्वाद:</span>
+      हर निवाले में खास अनुभव।<br><br>
+
+      <span class="highlight">गुणवत्ता:</span>
+      भोजन और सेवा में बेहतर मानक।<br><br>
+
+      <span class="highlight">अपनापन:</span>
+      हर ग्राहक हमारे लिए खास है।
+    </p>
+  </section>
+
+  <section class="card">
+    <h3>MASALO से जुड़ें</h3>
+    <p>
+      हमारे मेनू को देखें और अपने पसंदीदा भोजन का
+      आनंद लेने के लिए हमसे संपर्क करें।
+    </p>
+
+    <a href="menu.html" class="button">मेनू देखें</a>
+    <a href="contact.html" class="button">संपर्क करें</a>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> MASALO. सभी अधिकार सुरक्षित।
+</footer>
+
+<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>

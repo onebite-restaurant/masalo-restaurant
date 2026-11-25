@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120e">
+  <meta name="description" content="MASALO Food Menu - स्वादिष्ट खाने और शानदार व्यंजनों की सूची।">
+  <title>MASALO | Food Menu</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #17120e;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      background: #211a14;
+      border-bottom: 1px solid #403326;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f5b942;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #f5b942;
+    }
+
+    .page-hero {
+      text-align: center;
+      padding: 75px 7%;
+      background: #211a14;
+    }
+
+    .page-hero small {
+      color: #f5b942;
+      letter-spacing: 3px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(35px, 6vw, 60px);
+      margin: 15px 0;
+    }
+
+    .page-hero h1 span {
+      color: #f5b942;
+    }
+
+    .page-hero p {
+      color: #c5baae;
+    }
+
+    .menu-section {
+      padding: 60px 7%;
+    }
+
+    .category-title {
+      color: #f5b942;
+      font-size: 28px;
+      margin: 35px 0 20px;
+      border-bottom: 1px solid #403326;
+      padding-bottom: 10px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .menu-card {
+      background: #251d16;
+      border: 1px solid #403326;
+      border-radius: 12px;
+      padding: 25px;
+      transition: 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: #f5b942;
+    }
+
+    .food-icon {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .menu-card h3 {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .menu-card p {
+      color: #b9afa4;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price {
+      color: #f5b942;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .order-btn {
+      background: #f5b942;
+      color: #17120e;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .order-btn:hover {
+      background: #ffd36c;
+    }
+
+    .notice {
+      text-align: center;
+      color: #b9afa4;
+      margin-top: 35px;
+      font-size: 14px;
+    }
+
+    .footer {
+      background: #100d0a;
+      padding: 35px 7%;
+      text-align: center;
+      border-top: 1px solid #403326;
+    }
+
+    .footer p {
+      color: #a99e92;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #f5b942;
+    }
+
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-hero {
+        padding: 55px 7%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="navbar">
+
+    <a href="index.html" class="logo">
+      MASALO
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- PAGE HERO -->
+
+  <section class="page-hero">
+
+    <small>MASALO FOOD MENU</small>
+
+    <h1>
+      हमारा <span>Menu</span>
+    </h1>
+
+    <p>
+      अपने पसंदीदा स्वाद को चुनें।
+    </p>
+
+  </section>
+
+  <!-- MENU -->
+
+  <main class="menu-section">
+
+    <!-- STARTERS -->
+
+    <h2 class="category-title">
+      🥗 Starters
+    </h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="food-icon">🍟</div>
+        <h3>French Fries</h3>
+        <p>कुरकुरे और स्वादिष्ट फ्रेंच फ्राइज।</p>
+        <div class="price-row">
+          <span class="price">₹99</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20French%20Fries" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🥪</div>
+        <h3>Veg Sandwich</h3>
+        <p>ताजी सब्जियों से बना स्वादिष्ट सैंडविच।</p>
+        <div class="price-row">
+          <span class="price">₹119</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Veg%20Sandwich" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🍕</div>
+        <h3>Mini Pizza</h3>
+        <p>चीज और सब्जियों से भरपूर मिनी पिज्जा।</p>
+        <div class="price-row">
+          <span class="price">₹149</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Mini%20Pizza" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MAIN COURSE -->
+
+    <h2 class="category-title">
+      🍔 Main Course
+    </h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="food-icon">🍔</div>
+        <h3>Classic Burger</h3>
+        <p>ताजा बर्गर और खास MASALO सॉस।</p>
+        <div class="price-row">
+          <span class="price">₹149</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Classic%20Burger" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🍝</div>
+        <h3>White Sauce Pasta</h3>
+        <p>क्रीमी सॉस और स्वादिष्ट पास्ता।</p>
+        <div class="price-row">
+          <span class="price">₹179</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20White%20Sauce%20Pasta" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🍜</div>
+        <h3>Veg Noodles</h3>
+        <p>सब्जियों और मसालों से बने नूडल्स।</p>
+        <div class="price-row">
+          <span class="price">₹129</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Veg%20Noodles" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DESSERTS -->
+
+    <h2 class="category-title">
+      🍰 Desserts
+    </h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="food-icon">🍰</div>
+        <h3>Chocolate Cake</h3>
+        <p>चॉकलेट से भरपूर मीठा केक।</p>
+        <div class="price-row">
+          <span class="price">₹99</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Chocolate%20Cake" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🍨</div>
+        <h3>Vanilla Ice Cream</h3>
+        <p>ठंडी और स्वादिष्ट वनीला आइसक्रीम।</p>
+        <div class="price-row">
+          <span class="price">₹79</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Vanilla%20Ice%20Cream" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="food-icon">🥤</div>
+        <h3>Cold Coffee</h3>
+        <p>क्रीमी और ताजगी से भरी कोल्ड कॉफी।</p>
+        <div class="price-row">
+          <span class="price">₹119</span>
+          <a class="order-btn" href="https://wa.me/919241744280?text=I%20want%20to%20order%20Cold%20Coffee" target="_blank" rel="noopener">Order</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="notice">
+      नोट: ये शुरुआती नमूना मेनू और कीमतें हैं।
+      वास्तविक मेनू के अनुसार इन्हें बदलें।
+    </p>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="logo">
+      MASALO
+    </div>
+
+    <p>
+      स्वाद की नई पहचान
+    </p>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="offers.html">Offers</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <p>
+      © <span id="year"></span> MASALO.
+      All Rights Reserved.
+    </p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
