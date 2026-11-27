@@ -40,6 +40,24 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .error{background:#481d1d;color:#ffd1d1;padding:12px;border-radius:9px;margin-top:10px}
 footer{text-align:center;color:#aaa;padding:25px}
 .hidden{display:none}
+
+.payment-option{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #725329;
+  border-radius:9px;
+  background:#17120d;
+  color:#f1d7a0;
+  cursor:pointer;
+}
+.payment-option input[type="radio"]{
+  width:auto;
+  margin:0;
+  accent-color:#c99742;
+}
 </style>
 </head>
 
@@ -78,9 +96,31 @@ QR कोड से आने पर आपकी टेबल अपने आ�
 <div class="panel" id="cart">
 <h2 class="section-title">🛒 आपका Cart</h2>
 <div id="cartItems">अभी आपका Cart खाली है।</div>
+
 <p class="total">कुल बिल: ₹<span id="grandTotal">0</span></p>
 
+<h3 style="color:#e9bd68">💳 भुगतान का तरीका</h3>
+<p style="color:#ccc;font-size:14px">
+कृपया भुगतान का तरीका चुनें।
+</p>
+
+<label class="payment-option">
+<input type="radio" name="paymentMethod" value="Cash" checked>
+Cash (नकद)
+</label>
+
+<label class="payment-option">
+<input type="radio" name="paymentMethod" value="UPI">
+UPI
+</label>
+
+<label class="payment-option">
+<input type="radio" name="paymentMethod" value="Other">
+Other (अन्य)
+</label>
+
 <h3 style="color:#e9bd68">ऑर्डर की जानकारी</h3>
+
 <label>आपका नाम</label>
 <input id="customerName" placeholder="अपना नाम लिखें" maxlength="60">
 
@@ -97,20 +137,27 @@ Place Order
 <div class="panel">
 <h2 class="section-title">🔔 Table Service</h2>
 <p style="color:#ccc">आपको किसी सहायता की जरूरत है? अपने मोबाइल से हमें बुलाएँ।</p>
+
 <div class="action-grid">
 <button onclick="sendService('Call Waiter')">🔔 Call Waiter</button>
 <button onclick="sendService('Water Please')">🥤 पानी मँगाएँ</button>
 <button onclick="sendService('Request Bill')">🧾 बिल मँगाएँ</button>
 <button onclick="sendService('Other Help')">🙋 अन्य सहायता</button>
 </div>
+
 <div id="serviceMessage"></div>
 </div>
 
 <div class="panel">
 <h2 class="section-title">📦 अपना ऑर्डर Track करें</h2>
+
 <label>अपना Tracking Code डालें</label>
 <input id="trackingInput" placeholder="अपना 32 अक्षरों वाला Tracking Code डालें">
-<button onclick="startTracking()" style="width:100%">Track My Order</button>
+
+<button onclick="startTracking()" style="width:100%">
+Track My Order
+</button>
+
 <div id="trackingResult"></div>
 </div>
 
@@ -192,6 +239,7 @@ function getTotal(){
 function renderCart(){
  const box=document.getElementById("cartItems");
  const selected=products.filter(p=>cart[p.id]);
+
  if(!selected.length){
   box.innerHTML="अभी आपका Cart खाली है।";
  }else{
@@ -209,6 +257,7 @@ function renderCart(){
    </div>
   `).join("");
  }
+
  document.getElementById("grandTotal").textContent=getTotal();
 }
 
@@ -220,14 +269,22 @@ document.getElementById("placeOrderBtn").addEventListener("click",async()=>{
  const button=document.getElementById("placeOrderBtn");
 
  try{
-  if(!window.MASALO) throw new Error("Firebase अभी लोड नहीं हुआ। पेज को कुछ देर बाद फिर खोलें।");
+  if(!window.MASALO) {
+   throw new Error("Firebase अभी लोड नहीं हुआ। पेज को कुछ देर बाद फिर खोलें।");
+  }
 
   const customerName=document.getElementById("customerName").value.trim();
   const phone=document.getElementById("customerPhone").value.trim();
   const tableNumber=Number(document.getElementById("tableNumber").value);
 
+  const paymentMethod=document.querySelector(
+   'input[name="paymentMethod"]:checked'
+  ).value;
+
   if(!customerName) throw new Error("अपना नाम लिखें।");
-  if(!/^[0-9+\-\s]{10,15}$/.test(phone)) throw new Error("सही मोबाइल नंबर लिखें।");
+  if(!/^[0-9+\-\s]{10,15}$/.test(phone)) {
+   throw new Error("सही मोबाइल नंबर लिखें।");
+  }
   if(!tableNumber) throw new Error("अपनी टेबल चुनें।");
   if(getTotal()<=0) throw new Error("पहले Cart में खाना जोड़ें।");
 
@@ -247,7 +304,8 @@ document.getElementById("placeOrderBtn").addEventListener("click",async()=>{
    phone,
    tableNumber,
    items,
-   total:getTotal()
+   total:getTotal(),
+   paymentMethod
   });
 
   message.innerHTML=`
@@ -255,10 +313,13 @@ document.getElementById("placeOrderBtn").addEventListener("click",async()=>{
     <h3>🎉 आपका ऑर्डर भेज दिया गया!</h3>
     <p>Table Number: ${result.tableNumber}</p>
     <p>कुल बिल: ₹${result.total}</p>
+    <p>भुगतान का तरीका: ${paymentMethod}</p>
     <p>आपका Tracking Code:</p>
     <b style="word-break:break-all">${result.trackingCode}</b>
     <p>इस कोड को सुरक्षित रखें। इसी से ऑर्डर Track कर सकेंगे।</p>
-    <button onclick="copyTracking('${result.trackingCode}')">Tracking Code Copy करें</button>
+    <button onclick="copyTracking('${result.trackingCode}')">
+     Tracking Code Copy करें
+    </button>
    </div>
   `;
 
@@ -284,13 +345,21 @@ window.copyTracking=async(code)=>{
 
 window.sendService=async(type)=>{
  const box=document.getElementById("serviceMessage");
+
  try{
   if(!window.MASALO) throw new Error("Firebase लोड नहीं हुआ।");
+
   const table=Number(document.getElementById("tableNumber").value);
   if(!table) throw new Error("पहले अपनी टेबल चुनें।");
 
   await window.MASALO.requestService(type,table);
-  box.innerHTML=`<div class="result">आपकी ${type} की रिक्वेस्ट भेज दी गई है। वेटर को सूचना मिल गई है।</div>`;
+
+  box.innerHTML=`
+   <div class="result">
+    आपकी ${type} की रिक्वेस्ट भेज दी गई है।
+    वेटर को सूचना मिल गई है।
+   </div>
+  `;
  }catch(error){
   box.innerHTML=`<div class="error">${error.message}</div>`;
  }
@@ -309,6 +378,7 @@ window.startTracking=()=>{
 
  try{
   if(!window.MASALO) throw new Error("Firebase लोड नहीं हुआ।");
+  if(!code) throw new Error("अपना Tracking Code डालें।");
 
   box.innerHTML="ऑर्डर की जानकारी खोज रहे हैं...";
 
@@ -333,6 +403,7 @@ window.startTracking=()=>{
      <p>${labels[data.status]||data.status}</p>
      <p>Table: ${data.tableNumber}</p>
      <p>Order Total: ₹${data.total}</p>
+     <p>भुगतान का तरीका: ${data.paymentMethod||"जानकारी उपलब्ध नहीं"}</p>
     </div>
    `;
   });
