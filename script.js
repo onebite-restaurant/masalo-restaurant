@@ -15,6 +15,8 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
+/* MASALO Firebase Configuration */
+
 const firebaseConfig = {
   apiKey: "AIzaSyAxTtHQBZZtHB3-vWNFcJqjvTTqqTdO1gM",
   authDomain: "masalo-6abad.firebaseapp.com",
@@ -25,12 +27,17 @@ const firebaseConfig = {
   appId: "1:762877990171:web:90b33a47650e644ccaefbe"
 };
 
+/* Firebase Initialize */
+
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
 
+/* Tracking Code Generate */
+
 function createTrackingCode() {
   const bytes = new Uint8Array(16);
+
   crypto.getRandomValues(bytes);
 
   return Array.from(bytes)
@@ -38,7 +45,28 @@ function createTrackingCode() {
     .join("");
 }
 
-// ग्राहक का ऑर्डर
+/* Payment Method Validate */
+
+function normalizePaymentMethod(value) {
+  const method = String(value || "").trim().toLowerCase();
+
+  if (method === "cash") {
+    return "Cash";
+  }
+
+  if (method === "upi") {
+    return "UPI";
+  }
+
+  if (method === "other") {
+    return "Other";
+  }
+
+  throw new Error("कृपया Cash, UPI या Other में से भुगतान तरीका चुनें।");
+}
+
+/* Place Customer Order */
+
 async function placeOrder(order) {
   const customerName = String(order.customerName || "").trim();
   const phone = String(order.phone || "").trim();
@@ -49,11 +77,15 @@ async function placeOrder(order) {
     throw new Error("अपना नाम लिखें।");
   }
 
-  if (phone.length < 10 || phone.length > 15) {
+  if (!/^[0-9+\-\s()]{10,15}$/.test(phone)) {
     throw new Error("सही मोबाइल नंबर लिखें।");
   }
 
-  if (!Number.isInteger(tableNumber) || tableNumber < 1 || tableNumber > 20) {
+  if (
+    !Number.isInteger(tableNumber) ||
+    tableNumber < 1 ||
+    tableNumber > 20
+  ) {
     throw new Error("सही टेबल नंबर चुनें।");
   }
 
@@ -65,8 +97,12 @@ async function placeOrder(order) {
     throw new Error("ऑर्डर का कुल बिल सही नहीं है।");
   }
 
+  const paymentMethod = normalizePaymentMethod(order.paymentMethod);
+
   const trackingCode = createTrackingCode();
+
   const orderRef = push(ref(database, "orders"));
+
   const createdAt = Date.now();
 
   const orderData = {
@@ -76,28 +112,41 @@ async function placeOrder(order) {
     status: "Pending",
     createdAt,
     total,
+    totalAmount: total,
     tableNumber,
+    tableLabel: "Table " + tableNumber,
+    paymentMethod,
     trackingCode
   };
 
+  /* Save Order */
+
   await set(orderRef, orderData);
 
-  await set(ref(database, "tracking/" + trackingCode), {
-    status: "Pending",
-    tableNumber,
-    createdAt,
-    total
-  });
+  /* Save Tracking Information */
+
+  await set(
+    ref(database, "tracking/" + trackingCode),
+    {
+      status: "Pending",
+      tableNumber,
+      createdAt,
+      total,
+      trackingCode
+    }
+  );
 
   return {
     orderId: orderRef.key,
     trackingCode,
     tableNumber,
-    total
+    total,
+    paymentMethod
   };
 }
 
-// टेबल सर्विस रिक्वेस्ट
+/* Table Service Request */
+
 async function requestService(type, tableNumber) {
   const allowedTypes = [
     "Call Waiter",
@@ -112,7 +161,11 @@ async function requestService(type, tableNumber) {
     throw new Error("गलत सर्विस रिक्वेस्ट।");
   }
 
-  if (!Number.isInteger(table) || table < 1 || table > 20) {
+  if (
+    !Number.isInteger(table) ||
+    table < 1 ||
+    table > 20
+  ) {
     throw new Error("सही टेबल नंबर चुनें।");
   }
 
@@ -128,46 +181,76 @@ async function requestService(type, tableNumber) {
   return requestRef.key;
 }
 
-// ऑर्डर ट्रैक करना
+/* Customer Table Bill Listener */
+
+function listenTableBill(tableNumber, callback) {
+  const table = Number(tableNumber);
+
+  if (
+    !Number.isInteger(table) ||
+    table < 1 ||
+    table > 20
+  ) {
+    throw new Error("सही टेबल नंबर चुनें।");
+  }
+
+  return onValue(
+    ref(database, "tableBills/" + table),
+    snapshot => {
+      callback(snapshot.exists() ? snapshot.val() : null);
+    }
+  );
+}
+
+/* Order Tracking */
+
 function trackOrder(trackingCode, callback) {
   if (!/^[a-f0-9]{32}$/i.test(trackingCode)) {
     throw new Error("Tracking Code सही नहीं है।");
   }
 
-  const trackingRef = ref(database, "tracking/" + trackingCode);
-
-  return onValue(trackingRef, snapshot => {
-    if (snapshot.exists()) {
-      callback(snapshot.val());
-    } else {
-      callback(null);
+  return onValue(
+    ref(database, "tracking/" + trackingCode),
+    snapshot => {
+      callback(snapshot.exists() ? snapshot.val() : null);
     }
-  });
+  );
 }
 
-// Admin लॉगिन
-async function adminLogin(email, password) {
-  const result = await signInWithEmailAndPassword(auth, email, password);
+/* Admin Login */
 
-  if (result.user.uid !== "HVSDW4Otl9Mf1WZJ6REMk7jATqu1") {
+async function adminLogin(email, password) {
+  const result = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  if (
+    result.user.uid !== "HVSDW4Otl9Mf1WZJ6REMk7jATqu1"
+  ) {
     await signOut(auth);
+
     throw new Error("आप MASALO Admin नहीं हैं।");
   }
 
   return result;
 }
 
-// Admin लॉगआउट
+/* Admin Logout */
+
 async function adminLogout() {
   return signOut(auth);
 }
 
-// सभी पेजों के लिए फ़ंक्शन उपलब्ध
+/* MASALO Global Functions */
+
 window.MASALO = {
   database,
   auth,
   placeOrder,
   requestService,
+  listenTableBill,
   trackOrder,
   adminLogin,
   adminLogout
