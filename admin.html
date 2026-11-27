@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -6,6 +7,7 @@
 <meta name="theme-color" content="#15100b">
 <meta name="description" content="MASALO Admin Dashboard">
 <title>MASALO | Admin Dashboard</title>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#100e0b;color:#fff;font-family:Arial,sans-serif}
@@ -36,58 +38,108 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .empty{color:#aaa;padding:15px}
 </style>
 </head>
+
 <body>
+
 <header>
 <h1>MASALO ADMIN</h1>
 <p>Restaurant Management Dashboard</p>
 </header>
+
 <main>
+
 <section class="panel" id="loginPanel">
 <h2>Admin Login</h2>
+
 <label for="email">Email Address</label>
 <input id="email" type="email" placeholder="Admin email" autocomplete="username">
+
 <label for="password">Password</label>
 <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+
 <button id="loginBtn" style="width:100%">Login to Dashboard</button>
 <div id="loginMessage"></div>
 </section>
 
 <section id="dashboard" class="hidden">
+
 <div class="row" style="justify-content:space-between">
 <h2>Dashboard Overview</h2>
 <button id="logoutBtn" class="logout">Logout</button>
 </div>
+
 <div class="cards">
-<div class="stat"><small>आज की कमाई</small><strong id="todayEarnings">₹0</strong></div>
-<div class="stat"><small>आज पूरे हुए ऑर्डर</small><strong id="todayOrders">0</strong></div>
-<div class="stat"><small>आज के कुल ऑर्डर</small><strong id="allTodayOrders">0</strong></div>
-<div class="stat"><small>Pending Orders</small><strong id="pendingOrders">0</strong></div>
+<div class="stat">
+<small>आज की कमाई</small>
+<strong id="todayEarnings">₹0</strong>
+</div>
+
+<div class="stat">
+<small>आज पूरे हुए ऑर्डर</small>
+<strong id="todayOrders">0</strong>
+</div>
+
+<div class="stat">
+<small>आज के कुल ऑर्डर</small>
+<strong id="allTodayOrders">0</strong>
+</div>
+
+<div class="stat">
+<small>Pending Orders</small>
+<strong id="pendingOrders">0</strong>
+</div>
 </div>
 
 <div class="panel">
 <h2>📦 Customer Orders</h2>
-<p class="muted">नए ऑर्डर यहाँ अपने आप दिखाई देंगे। Completed ऑर्डर को Recent Orders में सुरक्षित भेज सकते हैं।</p>
-<div id="ordersList"><div class="empty">ऑर्डर लोड हो रहे हैं...</div></div>
+<p class="muted">
+नए ऑर्डर यहाँ अपने आप दिखाई देंगे।
+Completed ऑर्डर को Recent Orders में सुरक्षित भेज सकते हैं।
+</p>
+<div id="ordersList">
+<div class="empty">ऑर्डर लोड हो रहे हैं...</div>
+</div>
 </div>
 
 <div class="panel">
 <h2>🗂️ Recent / Archived Orders</h2>
-<p class="muted">यहाँ Active Orders से सुरक्षित किए गए Completed या Cancelled ऑर्डर दिखाई देंगे। इन्हें यहाँ से स्थायी रूप से हटाने का बटन नहीं है।</p>
-<div id="recentOrdersList"><div class="empty">पुराने ऑर्डर लोड हो रहे हैं...</div></div>
+<p class="muted">
+यहाँ Active Orders से सुरक्षित किए गए Completed ऑर्डर दिखाई देंगे।
+</p>
+<div id="recentOrdersList">
+<div class="empty">पुराने ऑर्डर लोड हो रहे हैं...</div>
+</div>
 </div>
 
 <div class="panel">
 <h2>🔔 Table Service Requests</h2>
 <p class="muted">वेटर, पानी, बिल और अन्य सहायता की रिक्वेस्ट।</p>
-<div id="requestsList"><div class="empty">रिक्वेस्ट लोड हो रही हैं...</div></div>
+<div id="requestsList">
+<div class="empty">रिक्वेस्ट लोड हो रही हैं...</div>
 </div>
+</div>
+
 </section>
 </main>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+import {
+ getDatabase,
+ ref,
+ onValue,
+ update
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+
+import {
+ getAuth,
+ signInWithEmailAndPassword,
+ signOut,
+ onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxTtHQBZZtHB3-vWNFcJqjvTTqqTdO1gM",
@@ -98,208 +150,589 @@ const firebaseConfig = {
   messagingSenderId: "762877990171",
   appId: "1:762877990171:web:90b33a47650e644ccaefbe"
 };
+
 const ADMIN_UID = "HVSDW4Otl9Mf1WZJ6REMk7jATqu1";
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
+
 const $ = id => document.getElementById(id);
 
-let stopOrders = null, stopRecent = null, stopRequests = null;
-let currentOrders = {}, currentRecent = {};
+let stopOrders = null;
+let stopRecent = null;
+let stopRequests = null;
+
+let currentOrders = {};
+let currentRecent = {};
+
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
   }[char]));
 }
+
+
 function showMessage(id, message, isError=false) {
-  $(id).innerHTML = `<div class="${isError ? "error" : "message"}">${escapeHTML(message)}</div>`;
+  $(id).innerHTML =
+    `<div class="${isError ? "error" : "message"}">${escapeHTML(message)}</div>`;
 }
+
+
 function money(value) {
   return "₹" + Number(value || 0).toLocaleString("en-IN");
 }
+
+
 function dateText(timestamp) {
   return new Date(Number(timestamp || 0)).toLocaleString("en-IN");
 }
+
+
 function isToday(timestamp) {
-  const d = new Date(Number(timestamp || 0)), now = new Date();
-  return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth() && d.getDate()===now.getDate();
+  const d = new Date(Number(timestamp || 0));
+  const now = new Date();
+
+  return d.getFullYear() === now.getFullYear()
+    && d.getMonth() === now.getMonth()
+    && d.getDate() === now.getDate();
 }
+
+
 function calculateEarnings() {
-  // Combine active and archived entries by order ID to avoid double counting.
-  const combined = {...currentRecent, ...currentOrders};
+
+  // Active और Recent ऑर्डर को ID के आधार पर मिलाकर
+  // एक ही ऑर्डर की कमाई दो बार नहीं गिनी जाएगी।
+
+  const combined = {
+    ...currentRecent,
+    ...currentOrders
+  };
+
   const list = Object.values(combined);
+
   const today = list.filter(o => isToday(o.createdAt));
-  const completed = today.filter(o => o.status === "Completed");
-  $("todayEarnings").textContent = money(completed.reduce((sum,o)=>sum+Number(o.total||0),0));
+
+  const completed = today.filter(
+    o => o.status === "Completed"
+  );
+
+  $("todayEarnings").textContent = money(
+    completed.reduce(
+      (sum,o) => sum + Number(o.total || 0),
+      0
+    )
+  );
+
   $("todayOrders").textContent = completed.length;
   $("allTodayOrders").textContent = today.length;
-  $("pendingOrders").textContent = Object.values(currentOrders).filter(o=>o.status==="Pending").length;
+
+  $("pendingOrders").textContent =
+    Object.values(currentOrders)
+      .filter(o => o.status === "Pending")
+      .length;
 }
+
+
 function itemsHTML(order) {
-  const items = Array.isArray(order.items) ? order.items : Object.values(order.items || {});
+
+  const items = Array.isArray(order.items)
+    ? order.items
+    : Object.values(order.items || {});
+
   return items.map(item =>
-    `<li>${escapeHTML(item.name)} × ${Number(item.quantity||0)} — ${money(item.subtotal)}</li>`
+    `<li>
+      ${escapeHTML(item.name)}
+      × ${Number(item.quantity || 0)}
+      — ${money(item.subtotal)}
+    </li>`
   ).join("");
 }
+
+
+function paymentText(order) {
+
+  const method = order.paymentMethod;
+
+  if (method === "Cash") {
+    return "Cash (नकद)";
+  }
+
+  if (method === "UPI") {
+    return "UPI";
+  }
+
+  if (method === "Other") {
+    return "Other (अन्य)";
+  }
+
+  return "पुराने ऑर्डर में उपलब्ध नहीं";
+}
+
+
 function renderOrders(orders) {
+
   currentOrders = orders || {};
+
   calculateEarnings();
-  const list = Object.entries(currentOrders).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+
+  const list = Object.entries(currentOrders)
+    .sort((a,b) =>
+      (b[1].createdAt || 0) - (a[1].createdAt || 0)
+    );
+
   if (!list.length) {
-    $("ordersList").innerHTML='<div class="empty">अभी कोई Active ऑर्डर नहीं है।</div>';
+    $("ordersList").innerHTML =
+      '<div class="empty">अभी कोई Active ऑर्डर नहीं है।</div>';
     return;
   }
+
   $("ordersList").innerHTML = list.map(([id,o]) => `
+
     <div class="order">
-      <h3>Table ${escapeHTML(o.tableNumber)} — ${escapeHTML(o.customerName)}</h3>
+
+      <h3>
+        Table ${escapeHTML(o.tableNumber)}
+        — ${escapeHTML(o.customerName)}
+      </h3>
+
       <p><b>मोबाइल:</b> ${escapeHTML(o.phone)}</p>
-      <p><b>ऑर्डर:</b></p><ul>${itemsHTML(o)}</ul>
+
+      <p><b>ऑर्डर:</b></p>
+      <ul>${itemsHTML(o)}</ul>
+
       <p><b>कुल बिल: ${money(o.total)}</b></p>
-      <p class="muted">समय: ${dateText(o.createdAt)}</p>
-      <p class="muted">Tracking: ${escapeHTML(o.trackingCode)}</p>
-      <p><b>वर्तमान स्थिति:</b> ${escapeHTML(o.status)}</p>
+
+      <p>
+        <b>भुगतान का तरीका:</b>
+        ${escapeHTML(paymentText(o))}
+      </p>
+
+      <p class="muted">
+        समय: ${dateText(o.createdAt)}
+      </p>
+
+      <p class="muted">
+        Tracking: ${escapeHTML(o.trackingCode)}
+      </p>
+
+      <p>
+        <b>वर्तमान स्थिति:</b>
+        ${escapeHTML(o.status)}
+      </p>
+
       <div class="row">
+
         <select data-status-id="${escapeHTML(id)}">
-          ${["Pending","Accepted","Preparing","Ready","Completed","Cancelled"].map(s=>
-            `<option value="${s}" ${o.status===s?"selected":""}>${s}</option>`
-          ).join("")}
+
+          ${[
+            "Pending",
+            "Accepted",
+            "Preparing",
+            "Ready",
+            "Completed",
+            "Cancelled"
+          ].map(s => `
+            <option value="${s}" ${o.status===s?"selected":""}>
+              ${s}
+            </option>
+          `).join("")}
+
         </select>
-        <button data-update-order="${escapeHTML(id)}">Update Status</button>
-        ${o.status==="Completed" ? `<button class="archiveBtn" data-archive-order="${escapeHTML(id)}">Recent Orders में सुरक्षित करें</button>` : ""}
+
+        <button data-update-order="${escapeHTML(id)}">
+          Update Status
+        </button>
+
+        ${
+          o.status === "Completed"
+          ? `
+            <button
+              class="archiveBtn"
+              data-archive-order="${escapeHTML(id)}">
+              Recent Orders में सुरक्षित करें
+            </button>
+          `
+          : ""
+        }
+
       </div>
-    </div>`).join("");
+
+    </div>
+
+  `).join("");
 }
+
+
 function renderRecent(orders) {
+
   currentRecent = orders || {};
+
   calculateEarnings();
-  const list = Object.entries(currentRecent).sort((a,b)=>(b[1].archivedAt||b[1].createdAt||0)-(a[1].archivedAt||a[1].createdAt||0));
+
+  const list = Object.entries(currentRecent)
+    .sort((a,b) =>
+      (b[1].archivedAt || b[1].createdAt || 0)
+      -
+      (a[1].archivedAt || a[1].createdAt || 0)
+    );
+
   if (!list.length) {
-    $("recentOrdersList").innerHTML='<div class="empty">अभी कोई ऑर्डर Recent Orders में सुरक्षित नहीं है।</div>';
+    $("recentOrdersList").innerHTML =
+      '<div class="empty">अभी कोई ऑर्डर Recent Orders में सुरक्षित नहीं है।</div>';
     return;
   }
+
   $("recentOrdersList").innerHTML = list.map(([id,o]) => `
+
     <div class="order">
-      <h3>Table ${escapeHTML(o.tableNumber)} — ${escapeHTML(o.customerName)}</h3>
+
+      <h3>
+        Table ${escapeHTML(o.tableNumber)}
+        — ${escapeHTML(o.customerName)}
+      </h3>
+
       <p><b>मोबाइल:</b> ${escapeHTML(o.phone)}</p>
-      <p><b>ऑर्डर:</b></p><ul>${itemsHTML(o)}</ul>
+
+      <p><b>ऑर्डर:</b></p>
+      <ul>${itemsHTML(o)}</ul>
+
       <p><b>कुल बिल: ${money(o.total)}</b></p>
+
+      <p>
+        <b>भुगतान का तरीका:</b>
+        ${escapeHTML(paymentText(o))}
+      </p>
+
       <p><b>स्थिति:</b> ${escapeHTML(o.status)}</p>
-      <p class="muted">ऑर्डर समय: ${dateText(o.createdAt)}</p>
-      <p class="muted">Recent में सुरक्षित किया: ${dateText(o.archivedAt)}</p>
-      <p class="muted">Tracking: ${escapeHTML(o.trackingCode)}</p>
-    </div>`).join("");
+
+      <p class="muted">
+        ऑर्डर समय: ${dateText(o.createdAt)}
+      </p>
+
+      <p class="muted">
+        Recent में सुरक्षित किया: ${dateText(o.archivedAt)}
+      </p>
+
+      <p class="muted">
+        Tracking: ${escapeHTML(o.trackingCode)}
+      </p>
+
+    </div>
+
+  `).join("");
 }
+
+
 async function archiveOrder(id) {
+
   const order = currentOrders[id];
-  if (!order) { alert("यह ऑर्डर Active सूची में नहीं मिला।"); return; }
-  if (order.status !== "Completed") { alert("केवल Completed ऑर्डर Recent Orders में भेज सकते हैं।"); return; }
-  if (!confirm("इस Completed ऑर्डर को Active Orders से हटाकर Recent Orders में सुरक्षित करें?")) return;
-  try {
-    const archived = {...order, archivedAt: Date.now()};
-    const changes = {};
-    changes["recentOrders/"+id] = archived;
-    changes["orders/"+id] = null;
-    await update(ref(db), changes);
-    alert("ऑर्डर Recent Orders में सुरक्षित हो गया।");
-  } catch (error) {
-    alert("ऑर्डर सुरक्षित नहीं हुआ: " + error.message);
-  }
-}
-async function updateOrderStatus(id) {
-  try {
-    const order = currentOrders[id];
-    if (!order) throw new Error("Order नहीं मिला।");
-    const select = document.querySelector(`[data-status-id="${CSS.escape(id)}"]`);
-    if (!select) throw new Error("Status विकल्प नहीं मिला।");
-    const newStatus = select.value, changes = {};
-    changes["orders/"+id+"/status"] = newStatus;
-    if (order.trackingCode) changes["tracking/"+order.trackingCode+"/status"] = newStatus;
-    await update(ref(db), changes);
-    alert("ऑर्डर की स्थिति अपडेट हो गई।");
-  } catch (error) { alert("Error: " + error.message); }
-}
-function renderRequests(requests) {
-  const list = Object.entries(requests||{}).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-  if (!list.length) {
-    $("requestsList").innerHTML='<div class="empty">अभी कोई सहायता रिक्वेस्ट नहीं है।</div>';
+
+  if (!order) {
+    alert("यह ऑर्डर Active सूची में नहीं मिला।");
     return;
   }
-  $("requestsList").innerHTML = list.map(([id,r])=>`
-    <div class="request">
-      <h3>🔔 ${escapeHTML(r.type)}</h3>
-      <p><b>Table:</b> ${escapeHTML(r.tableNumber)}</p>
-      <p><b>Status:</b> ${escapeHTML(r.status)}</p>
-      <p class="muted">${dateText(r.createdAt)}</p>
-      <div class="row">
-        <select data-request-status="${escapeHTML(id)}">
-          <option value="Pending" ${r.status==="Pending"?"selected":""}>Pending</option>
-          <option value="Acknowledged" ${r.status==="Acknowledged"?"selected":""}>Acknowledged</option>
-          <option value="Resolved" ${r.status==="Resolved"?"selected":""}>Resolved</option>
-        </select>
-        <button data-update-request="${escapeHTML(id)}">Update</button>
-      </div>
-    </div>`).join("");
-}
-async function updateRequestStatus(id) {
+
+  if (order.status !== "Completed") {
+    alert("केवल Completed ऑर्डर Recent Orders में भेज सकते हैं।");
+    return;
+  }
+
+  if (!confirm(
+    "इस Completed ऑर्डर को Active Orders से हटाकर Recent Orders में सुरक्षित करें?"
+  )) return;
+
   try {
-    const select = document.querySelector(`[data-request-status="${CSS.escape(id)}"]`);
-    if (!select) throw new Error("Status विकल्प नहीं मिला।");
-    await update(ref(db,"serviceRequests/"+id), {status:select.value});
-    alert("Service request अपडेट हो गई।");
-  } catch(error) { alert("Error: " + error.message); }
+
+    const archived = {
+      ...order,
+      archivedAt: Date.now()
+    };
+
+    const changes = {};
+
+    changes["recentOrders/" + id] = archived;
+    changes["orders/" + id] = null;
+
+    await update(ref(db), changes);
+
+    alert("ऑर्डर Recent Orders में सुरक्षित हो गया।");
+
+  } catch (error) {
+
+    alert("ऑर्डर सुरक्षित नहीं हुआ: " + error.message);
+
+  }
 }
+
+
+async function updateOrderStatus(id) {
+
+  try {
+
+    const order = currentOrders[id];
+
+    if (!order) {
+      throw new Error("Order नहीं मिला।");
+    }
+
+    const select = document.querySelector(
+      `[data-status-id="${CSS.escape(id)}"]`
+    );
+
+    if (!select) {
+      throw new Error("Status विकल्प नहीं मिला।");
+    }
+
+    const newStatus = select.value;
+    const changes = {};
+
+    changes["orders/" + id + "/status"] = newStatus;
+
+    if (order.trackingCode) {
+      changes["tracking/" + order.trackingCode + "/status"] =
+        newStatus;
+    }
+
+    await update(ref(db), changes);
+
+    alert("ऑर्डर की स्थिति अपडेट हो गई।");
+
+  } catch (error) {
+
+    alert("Error: " + error.message);
+
+  }
+}
+
+
+function renderRequests(requests) {
+
+  const list = Object.entries(requests || {})
+    .sort((a,b) =>
+      (b[1].createdAt || 0) - (a[1].createdAt || 0)
+    );
+
+  if (!list.length) {
+    $("requestsList").innerHTML =
+      '<div class="empty">अभी कोई सहायता रिक्वेस्ट नहीं है।</div>';
+    return;
+  }
+
+  $("requestsList").innerHTML = list.map(([id,r]) => `
+
+    <div class="request">
+
+      <h3>🔔 ${escapeHTML(r.type)}</h3>
+
+      <p><b>Table:</b> ${escapeHTML(r.tableNumber)}</p>
+
+      <p><b>Status:</b> ${escapeHTML(r.status)}</p>
+
+      <p class="muted">${dateText(r.createdAt)}</p>
+
+      <div class="row">
+
+        <select data-request-status="${escapeHTML(id)}">
+
+          <option value="Pending" ${r.status==="Pending"?"selected":""}>
+            Pending
+          </option>
+
+          <option value="Acknowledged" ${r.status==="Acknowledged"?"selected":""}>
+            Acknowledged
+          </option>
+
+          <option value="Resolved" ${r.status==="Resolved"?"selected":""}>
+            Resolved
+          </option>
+
+        </select>
+
+        <button data-update-request="${escapeHTML(id)}">
+          Update
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+async function updateRequestStatus(id) {
+
+  try {
+
+    const select = document.querySelector(
+      `[data-request-status="${CSS.escape(id)}"]`
+    );
+
+    if (!select) {
+      throw new Error("Status विकल्प नहीं मिला।");
+    }
+
+    await update(
+      ref(db, "serviceRequests/" + id),
+      {status: select.value}
+    );
+
+    alert("Service request अपडेट हो गई।");
+
+  } catch(error) {
+
+    alert("Error: " + error.message);
+
+  }
+}
+
+
 function stopDashboard() {
+
   if (stopOrders) stopOrders();
   if (stopRecent) stopRecent();
   if (stopRequests) stopRequests();
-  stopOrders = stopRecent = stopRequests = null;
+
+  stopOrders = null;
+  stopRecent = null;
+  stopRequests = null;
 }
+
+
 function startDashboard() {
+
   stopDashboard();
-  stopOrders = onValue(ref(db,"orders"), snapshot=>renderOrders(snapshot.val()||{}), error=>showMessage("ordersList",error.message,true));
-  stopRecent = onValue(ref(db,"recentOrders"), snapshot=>renderRecent(snapshot.val()||{}), error=>showMessage("recentOrdersList",error.message,true));
-  stopRequests = onValue(ref(db,"serviceRequests"), snapshot=>renderRequests(snapshot.val()||{}), error=>showMessage("requestsList",error.message,true));
+
+  stopOrders = onValue(
+    ref(db, "orders"),
+    snapshot => renderOrders(snapshot.val() || {}),
+    error => showMessage("ordersList", error.message, true)
+  );
+
+  stopRecent = onValue(
+    ref(db, "recentOrders"),
+    snapshot => renderRecent(snapshot.val() || {}),
+    error => showMessage("recentOrdersList", error.message, true)
+  );
+
+  stopRequests = onValue(
+    ref(db, "serviceRequests"),
+    snapshot => renderRequests(snapshot.val() || {}),
+    error => showMessage("requestsList", error.message, true)
+  );
 }
+
+
 $("ordersList").addEventListener("click", event => {
-  const updateButton = event.target.closest("[data-update-order]");
-  const archiveButton = event.target.closest("[data-archive-order]");
-  if (updateButton) updateOrderStatus(updateButton.dataset.updateOrder);
-  if (archiveButton) archiveOrder(archiveButton.dataset.archiveOrder);
-});
-$("requestsList").addEventListener("click", event => {
-  const button = event.target.closest("[data-update-request]");
-  if (button) updateRequestStatus(button.dataset.updateRequest);
-});
-$("loginBtn").addEventListener("click", async()=>{
-  const email=$("email").value.trim(), password=$("password").value, button=$("loginBtn");
-  try {
-    if(!email||!password) throw new Error("Email और Password भरें।");
-    button.disabled=true; button.textContent="Logging in...";
-    const result=await signInWithEmailAndPassword(auth,email,password);
-    if(result.user.uid!==ADMIN_UID) {
-      await signOut(auth);
-      throw new Error("यह अकाउंट MASALO Admin नहीं है।");
-    }
-  } catch(error) {
-    showMessage("loginMessage",error.message,true);
-  } finally {
-    button.disabled=false; button.textContent="Login to Dashboard";
+
+  const updateButton =
+    event.target.closest("[data-update-order]");
+
+  const archiveButton =
+    event.target.closest("[data-archive-order]");
+
+  if (updateButton) {
+    updateOrderStatus(updateButton.dataset.updateOrder);
   }
+
+  if (archiveButton) {
+    archiveOrder(archiveButton.dataset.archiveOrder);
+  }
+
 });
-$("logoutBtn").addEventListener("click",async()=>{ stopDashboard(); await signOut(auth); });
-onAuthStateChanged(auth,user=>{
-  if(user && user.uid===ADMIN_UID) {
+
+
+$("requestsList").addEventListener("click", event => {
+
+  const button =
+    event.target.closest("[data-update-request]");
+
+  if (button) {
+    updateRequestStatus(button.dataset.updateRequest);
+  }
+
+});
+
+
+$("loginBtn").addEventListener("click", async () => {
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const button = $("loginBtn");
+
+  try {
+
+    if (!email || !password) {
+      throw new Error("Email और Password भरें।");
+    }
+
+    button.disabled = true;
+    button.textContent = "Logging in...";
+
+    const result = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    if (result.user.uid !== ADMIN_UID) {
+
+      await signOut(auth);
+
+      throw new Error("यह अकाउंट MASALO Admin नहीं है।");
+
+    }
+
+  } catch(error) {
+
+    showMessage("loginMessage", error.message, true);
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Login to Dashboard";
+
+  }
+
+});
+
+
+$("logoutBtn").addEventListener("click", async () => {
+
+  stopDashboard();
+  await signOut(auth);
+
+});
+
+
+onAuthStateChanged(auth, user => {
+
+  if (user && user.uid === ADMIN_UID) {
+
     $("loginPanel").classList.add("hidden");
     $("dashboard").classList.remove("hidden");
-    $("loginMessage").innerHTML="";
+    $("loginMessage").innerHTML = "";
+
     startDashboard();
+
   } else {
+
     stopDashboard();
+
     $("dashboard").classList.add("hidden");
     $("loginPanel").classList.remove("hidden");
+
   }
+
 });
+
 </script>
+
 </body>
 </html>
